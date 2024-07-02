@@ -2,6 +2,22 @@ import Image from 'next/image'
 import pastaEgg from '/public/pastaEgg.jpg'
 import pasta from '/public/pasta.jpg'
 import pastaReady from '/public/pastaReady.jpg'
+import Carousel from "@/components/carousel";
+/*
+some components were taken from:
+https://www.w3schools.com/howto/howto_css_parallax.asp
+https://blog.logrocket.com/create-parallax-scrolling-css/
+https://flowbite.com/docs/components/card/
+*/
+const DATA = [
+    { image: '/table.jpg'},
+    { image: '/inside.jpg' },
+    { image: '/manyTables.jpg'},
+    { image: '/inside2.jpg'},
+    { image: '/bar.jpg'},
+    { image: '/barClose.jpg'}
+]
+
 
 export default function Story() {
     return (
@@ -59,9 +75,9 @@ export default function Story() {
             </section>
 
             <section className="@apply w-full min-h-[100vh] bg-red-900"><br/>
-                <h1 className=" text-center text-5xl text-white font-serif">Our kitchen</h1><br/>
+                <h1 className="text-center text-5xl text-white font-serif">Our kitchen</h1><br/>
                 <p className="m-auto text-center font-serif w-[55%] text-2xl text-white">
-                    Step into our kitchen and you'll find a team of passionate chefs who pour their heart and soul into
+                    Step into our kitchen and you will find a team of passionate chefs who pour their heart and soul into
                     each and every dish. Using only the freshest ingredients and time-honored recipes, we craft
                     mouthwatering pasta dishes that will tantalize your taste buds and leave you craving more.
                 </p>
@@ -98,8 +114,9 @@ export default function Story() {
             </section>
 
             <section
-                className="@apply flex min-h-screen flex-col items-center justify-center bg-fixed bg-[url('/restaurant.jpg')] bg-center bg-cover text-black] gap-y-16 text-center opacity-70">
-                <h1 className="text-5xl text-lime-200 font-serif align-text-top">Our atmosphere</h1><br/>
+                className="@apply flex min-h-screen flex-col items-center justify-center bg-fixed bg-yellow-50 bg-center bg-cover text-black] gap-y-16 text-center">
+                <h1 className="text-5xl text-red-900 font-serif align-text-top">Our atmosphere</h1>
+                <Carousel data={DATA} />
             </section>
         </div>
     );
