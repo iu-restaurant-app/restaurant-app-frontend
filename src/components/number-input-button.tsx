@@ -9,11 +9,11 @@ export default function NumberInputButton(props: NumberInputButtonProps) {
     const [count, setCount] = useState(1);
 
     return (
-        <div className="inline-flex h-[35px] items-stretch">
+        <div className="inline-flex items-stretch w-full">
 
-            <form className="max-w-xs inline-flex">
+            <form className="inline-flex w-full">
 
-                <div className="flex items-stretch max-w-[8rem] justify-between">
+                <div className="flex items-stretch justify-between w-full">
                     <div className="flex items-stretch">
                         <button type="button" id="decrement-button" data-input-counter-decrement="quantity-input"
                                 className="bg-default-600 flex items-center justify-center dark:bg-default-700 dark:hover:bg-default-600 rounded-s-lg p-1 focus:outline-none group"

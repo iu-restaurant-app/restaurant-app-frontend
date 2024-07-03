@@ -6,7 +6,7 @@ interface AddToCartButtonProps {
 export default function AddToCartButton(props: AddToCartButtonProps) {
     return (
         <button type="button"
-                className="transition-colors duration-300 ease-in-out inline-flex text-default-600 hover:text-white border border-default-600 hover:bg-default-600 font-medium rounded-lg text-sm px-2 py-2 me-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800 group items-center justify-between" onClick={props.onClick}>
+                className="w-full transition-colors duration-300 ease-in-out inline-flex text-default-600 hover:text-white border border-default-600 hover:bg-default-600 font-medium rounded-lg text-sm px-2 py-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800 group items-center justify-between" onClick={props.onClick}>
             <div className="inline-flex mr-2">
                 <div className="mr-0.5">{props.price}</div>
                 <div>$</div>
