@@ -1,9 +1,6 @@
-import Hero from '@/components/hero';
-
 export default function Page() {
-  return (
-    <div>
-      <Hero></Hero>
-    </div>
-  );
+    return (
+        <div>
+        </div>
+    );
 }
