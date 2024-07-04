@@ -1,7 +1,8 @@
 'use client'
+//Some styles are taken from https://flowbite.com
 import NumberInputButton from "@/components/number-input-button";
 import AddToCartButton from "@/components/add-to-cart";
-import {useState} from "react";
+import {useShoppingCart} from "@/context/ShoppingCartContext";
 
 interface MenuItemProps {
     title: string;
@@ -12,7 +13,13 @@ interface MenuItemProps {
 }
 
 export default function MenuItem(props: MenuItemProps) {
-    const [addToCart, setAddToCart] = useState(true);
+
+    const {getItemQuantity,
+        increaseCartQuantity,
+        decreaseCartQuantity,
+        removeFromCart} = useShoppingCart();
+
+    const quantity = getItemQuantity(props.title);
 
     return (
 
@@ -29,10 +36,10 @@ export default function MenuItem(props: MenuItemProps) {
                 <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{props.description}</p>
                 <p className="mb-3 font-light text-gray-500 dark:text-gray-400">{props.calories + " calories"}</p>
                 <div className={"h-[35px] transition-colors duration-300 ease-in-out inline-flex text-default-600 hover:text-white hover:bg-default-600 rounded-lg dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600"}>
-                    {addToCart? (
-                        <AddToCartButton onClick={() => setAddToCart(false)} price={50} />
+                    {quantity === 0? (
+                        <AddToCartButton onClick={() => increaseCartQuantity(props.title)} price={50} />
                     ) : (
-                        <NumberInputButton whenAmountBelowOne={() => setAddToCart(true)} />
+                        <NumberInputButton whenAmountBelowOne={() => removeFromCart(props.title)}  decreaseFunction={() => decreaseCartQuantity(props.title)} increaseFunction={() => increaseCartQuantity(props.title)} count={quantity}/>
                     )}
                 </div>
 

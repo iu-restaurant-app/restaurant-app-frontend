@@ -1,3 +1,4 @@
+//Some styles are taken from https://flowbite.com
 interface AddToCartButtonProps {
     onClick: () => void;
     price: number;
