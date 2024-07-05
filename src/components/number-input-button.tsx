@@ -2,7 +2,6 @@
 import {useState} from "react";
 interface NumberInputButtonProps {
     whenAmountBelowOne: () => void;
-
 }
 
 export default function NumberInputButton(props: NumberInputButtonProps) {

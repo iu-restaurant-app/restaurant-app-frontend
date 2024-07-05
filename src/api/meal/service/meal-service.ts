@@ -1,10 +1,10 @@
 import axios from "axios";
-import {MealCreateRequest} from "@/api/meal/request/meal-create-request";
+import {MealRequestResponse} from "@/api/meal/request/meal-request-response";
 
 export default class MealService {
     static readonly MEAL_SERVICE_BASE_URL = "http://10.90.137.110:8080/meal";
 
-    static get(title: string) {
+    static get(title: string): Promise<MealRequestResponse> {
         return new Promise((resolve, reject) => {
             axios({
                 method: 'get',
@@ -12,10 +12,10 @@ export default class MealService {
                 url: "/" + title
             })
                 .then((response) => {
-                    resolve(response.data as MealCreateRequest)
-            })
+                    resolve(response.data as MealRequestResponse);
+                })
                 .catch((error) => {
-                    console.log(error)
+                    console.log(error);
                 })
         })
     }
