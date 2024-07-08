@@ -1,13 +1,13 @@
 'use client';
-import { useState } from 'react';
 
 interface NumberInputButtonProps {
   whenAmountBelowOne: () => void;
+  decreaseFunction: () => void;
+  increaseFunction: () => void;
+  count: number;
 }
 
 export default function NumberInputButton(props: NumberInputButtonProps) {
-  const [count, setCount] = useState(1);
-
   return (
     <div className="inline-flex items-stretch w-full">
       <form className="inline-flex w-full">
@@ -19,10 +19,10 @@ export default function NumberInputButton(props: NumberInputButtonProps) {
               data-input-counter-decrement="quantity-input"
               className="bg-default-600 flex items-center justify-center dark:bg-default-700 dark:hover:bg-default-600 rounded-s-lg p-1 focus:outline-none group"
               onClick={() => {
-                if (count === 1) {
+                if (props.count === 1) {
                   props.whenAmountBelowOne();
                 } else {
-                  setCount(count - 1);
+                  props.decreaseFunction();
                 }
               }}
             >
@@ -51,7 +51,7 @@ export default function NumberInputButton(props: NumberInputButtonProps) {
               aria-describedby="helper-text-explanation"
               className="text-white px-2 bg-default-600 border-x-0 text-center text-sm flex py-1 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 w-7 content-center justify-center self-center"
             >
-              {count}
+              {props.count}
             </span>
           </div>
           <div className="flex items-stretch content-center">
@@ -63,7 +63,7 @@ export default function NumberInputButton(props: NumberInputButtonProps) {
             >
               <div
                 className="transition-colors duration-300 ease-in-out p-1 rounded-lg bg-default-600 group-hover:bg-default-950"
-                onClick={() => setCount(count + 1)}
+                onClick={props.increaseFunction}
               >
                 <svg
                   className="transition-colors duration-300 ease-in-out w-3 h-3 text-white dark:text-default-50 "

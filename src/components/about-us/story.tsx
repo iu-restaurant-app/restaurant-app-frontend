@@ -2,7 +2,7 @@ import Image from 'next/image';
 import pastaEgg from '/public/pastaEgg.jpg';
 import pasta from '/public/pasta.jpg';
 import pastaReady from '/public/pastaReady.jpg';
-import Carousel from '@/components/carousel';
+import Carousel from '@/components/about-us/carousel';
 /*
 some components were taken from:
 https://www.w3schools.com/howto/howto_css_parallax.asp
