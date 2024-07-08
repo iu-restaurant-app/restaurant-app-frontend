@@ -1,10 +1,11 @@
 'use client';
 
-import MenuGallery from '@/components/menu-gallery';
 import { useEffect, useState } from 'react';
-import { MealRequestResponse } from '@/api/meal/request/meal-request-response';
 import MealService from '@/api/meal/service/meal-service';
 import ByteArrayToImage from '@/utils/byte-array-to-image';
+import { MealRequestResponse } from '@/api/meal/request/meal-request-response';
+import MenuGallery from '@/components/menu-gallery';
+import ScrollToTopButton from '@/components/scroll-to-top-button';
 
 export default function Home() {
   const [meals, setMeals] = useState([] as MealRequestResponse[]);
@@ -21,5 +22,10 @@ export default function Home() {
       });
   }, []);
 
-  return <MenuGallery items={[...meals]} />;
+  return (
+    <div>
+      <MenuGallery items={[...meals]} />
+      <ScrollToTopButton />
+    </div>
+  );
 }
