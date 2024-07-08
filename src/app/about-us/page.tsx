@@ -1,11 +1,6 @@
 import Hero from '@/components/hero';
-import ContactUs from '@/components/contactus';
+import ContactUs from '@/components/contact-us';
 
 export default function Page() {
-  return (
-    <div>
-      <Hero></Hero>
-      <ContactUs></ContactUs>
-    </div>
-  );
+  return <div></div>;
 }
