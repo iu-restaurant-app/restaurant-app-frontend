@@ -3,7 +3,7 @@ import NumberInputButton from '@/components/number-input-button';
 import AddToCartButton from '@/components/add-to-cart-button';
 import { useState } from 'react';
 
-interface MenuItemProps {
+export interface MenuItemProps {
   title: string;
   description: string;
   price: number;

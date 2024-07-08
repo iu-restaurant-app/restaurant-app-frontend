@@ -15,7 +15,23 @@ export default class MealService {
           resolve(response.data as MealRequestResponse);
         })
         .catch(error => {
-          console.log(error);
+          reject(error);
+        });
+    });
+  }
+
+  static getAll(): Promise<MealRequestResponse[]> {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: 'get',
+        baseURL: this.MEAL_SERVICE_BASE_URL,
+        url: '',
+      })
+        .then(response => {
+          resolve(response.data as MealRequestResponse[]);
+        })
+        .catch(error => {
+          reject(error);
         });
     });
   }
