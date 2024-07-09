@@ -1,6 +1,7 @@
 'use client';
 import { toast, Toaster } from 'react-hot-toast';
 
+// taken from https://flowbite.com/blocks/marketing/contact/
 export default function ContactUs() {
   return (
     <div>
