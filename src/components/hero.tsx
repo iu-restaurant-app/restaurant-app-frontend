@@ -1,12 +1,8 @@
-import Image from 'next/image';
-
 export default function Hero() {
   return (
     <section className="bg-white">
-      <Image
-        width={1920}
-        height={1080}
-        className="h-auto w-full object-cover"
+      <img
+        className="h-screen w-full object-cover"
         src="/colorimagehero.png"
         alt="Italian landscape"
       />
