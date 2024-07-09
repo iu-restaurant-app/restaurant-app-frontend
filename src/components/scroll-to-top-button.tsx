@@ -1,7 +1,13 @@
+'use client';
 import { useEffect, useState } from 'react';
 import { ArrowUpIcon } from '@heroicons/react/20/solid';
 
-export default function ScrollToTopButton() {
+interface ScrollToTopButtonProps {
+  color: string;
+  onHoverColor: string;
+}
+
+export default function ScrollToTopButton(props: ScrollToTopButtonProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -31,7 +37,7 @@ export default function ScrollToTopButton() {
     >
       <button
         onClick={scrollToTop}
-        className="p-3 bg-default-600 text-white rounded-full shadow-lg hover:bg-default-700 focus:outline-none"
+        className={`p-3 ${props.color} text-white rounded-full shadow-lg hover:${props.onHoverColor} focus:outline-none`}
       >
         <ArrowUpIcon className="w-6 h-6" />
       </button>
