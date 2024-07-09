@@ -27,7 +27,11 @@ const Carousel = ({
 
   return (
     <div>
-      <div className="relative h-[500px] w-[900px] overflow-hidden rounded-3xl">
+      <meta
+        name="viewport"
+        content="width=device-width,height=device-height,initial-scale=1.0"
+      />
+      <div className="relative overflow-hidden rounded-3xl h-[200px] w-[350px] md:h-[500px] md:w-[900px]">
         <div
           ref={carouselRef}
           style={{
