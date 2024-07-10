@@ -1,14 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
-import { Link as ScrollLink } from 'react-scroll';
 
 import {
+  FaClock,
+  FaEnvelope,
   FaHome,
   FaInfoCircle,
-  FaPhone,
-  FaClock,
   FaMapMarkerAlt,
-  FaEnvelope,
+  FaPhone,
 } from 'react-icons/fa';
 
 interface SidebarProps {
@@ -23,6 +22,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
   return (
     <div
       className={`fixed top-0 left-0 z-40 h-screen p-4 bg-white transition-transform transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} w-72 shadow-lg rounded-r-lg`}
@@ -53,11 +53,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             <FaEnvelope className="text-gray-800" />
             <Link
               className="ml-3 font-bold text-gray-800 hover:text-gray-600"
-              href="#target-section"
-              onClick={e => {
-                e.preventDefault(); // Prevent default link behavior
-                scrollToId('ContactUs'); // Smooth scroll to target section
-              }}
+              href="/about-us#contact-us"
             >
               Contact Us
             </Link>
