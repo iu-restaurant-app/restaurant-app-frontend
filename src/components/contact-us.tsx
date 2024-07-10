@@ -6,7 +6,10 @@ export default function ContactUs() {
   return (
     <div>
       <Toaster position={'bottom-right'} reverseOrder={false} />
-      <section className="bg-gradient-to-b from-yellow-50 to-white min-h-screen">
+      <section
+        className="bg-gradient-to-b from-yellow-50 to-white min-h-screen"
+        id="contact-us"
+      >
         <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
           <h2 className="mb-4 tracking-tight text-3xl md:text-5xl font-semibold text-center text-red-800">
             Contact Us
