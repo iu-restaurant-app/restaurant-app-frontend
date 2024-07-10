@@ -1,47 +1,86 @@
 import React from 'react';
 import Link from 'next/link';
+import { Link as ScrollLink } from 'react-scroll';
+
+import {
+  FaHome,
+  FaInfoCircle,
+  FaPhone,
+  FaClock,
+  FaMapMarkerAlt,
+  FaEnvelope,
+} from 'react-icons/fa';
 
 interface SidebarProps {
   isOpen: boolean;
+  onClose: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
+  const scrollToId = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   return (
     <div
-      className={`bg-white text-gray-800 fixed h-3/4 top-1/2 left-0 transform -translate-y-1/2 transition-all duration-300 z-10 ${
-        isOpen ? 'w-64' : 'w-0 overflow-hidden'
-      } rounded-l-lg shadow-lg`}
+      className={`fixed top-0 left-0 z-40 h-screen p-4 bg-white transition-transform transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} w-72 shadow-lg rounded-r-lg`}
     >
-      <div className="flex flex-col justify-between h-full p-4">
-        <div className="flex flex-col items-start">
-          <div className="mt-4">
+      <div className="flex flex-col h-full justify-between">
+        <div>
+          <div className="flex items-center mt-4">
+            <FaHome className="text-gray-800" />
             <Link
-              href="#"
-              className="text-gray-800 hover:text-gray-500 font-bold"
+              href="/"
+              className="ml-3 font-bold text-gray-800 hover:text-gray-600"
+              onClick={onClose}
             >
-              Menu
+              Home
             </Link>
           </div>
-          <div className="mt-4">
+          <div className="flex items-center mt-4">
+            <FaInfoCircle className="text-gray-800" />
             <Link
               href="/about-us"
-              className="text-gray-800 hover:text-gray-500 font-bold"
+              className="ml-3 font-bold text-gray-800 hover:text-gray-600"
+              onClick={onClose}
             >
               About Us
             </Link>
           </div>
-          <div className="mt-4">
-            <a href="#" className="text-gray-800 hover:text-gray-500 font-bold">
-              Contacts
-            </a>
+          <div className="flex items-center mt-4">
+            <FaEnvelope className="text-gray-800" />
+            <Link
+              className="ml-3 font-bold text-gray-800 hover:text-gray-600"
+              href="#target-section"
+              onClick={e => {
+                e.preventDefault(); // Prevent default link behavior
+                scrollToId('ContactUs'); // Smooth scroll to target section
+              }}
+            >
+              Contact Us
+            </Link>
           </div>
         </div>
-        <div className="flex flex-col items-start mb-4 text-gray-800">
-          <div className="mt-4">
-            <p>Hours: 10:00 - 22:00</p>
+        <div>
+          <div className="flex items-center mb-4">
+            <FaPhone className="text-gray-800" />
+            <span className="ml-3 font-bold text-gray-800">
+              +7 922 886 08-08
+            </span>
           </div>
-          <div className="mt-4">
-            <p>Address: Innopolis, Universitetskaia, 1</p>
+          <div className="flex items-center mb-4">
+            <FaClock className="text-gray-800" />
+            <span className="ml-3 font-bold text-gray-800">
+              Hours: 10:00-22:00
+            </span>
+          </div>
+          <div className="flex items-center mb-4">
+            <FaMapMarkerAlt className="text-gray-800" />
+            <span className="ml-3 font-bold text-gray-800">
+              Address: Innopolis, Universitetskaia, 1
+            </span>
           </div>
         </div>
       </div>
