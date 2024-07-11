@@ -1,15 +1,13 @@
 'use client';
-interface CartIconProps {
-  onclick: () => void;
-  quantity: number;
-}
+import { useCartStore } from '@/hooks/useCartStorage';
 
-export default function CartIcon(props: CartIconProps) {
+export default function CartIcon() {
+  const { openCart, cartQuantity } = useCartStore(state => state);
   return (
     <button
       type="button"
       className="absolute inline-flex items-center p-3 text-sm font-medium text-center text-white bg-white rounded-full hover:bg-default-100 shadow-md shadow-gray-200 right-5 top-5"
-      onClick={props.onclick}
+      onClick={openCart}
     >
       <svg
         className="w-6 h-6 text-default-600"
@@ -28,7 +26,7 @@ export default function CartIcon(props: CartIconProps) {
       </svg>
       <span className="sr-only">Notifications</span>
       <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-default-600 border-2 border-white rounded-full -top-1 -end-1">
-        {props.quantity}
+        {cartQuantity}
       </div>
     </button>
   );

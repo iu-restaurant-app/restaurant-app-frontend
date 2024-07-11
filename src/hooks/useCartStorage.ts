@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { MealRequestResponse } from '@/api/meal/request/meal-request-response';
+import { computed } from 'zustand-computed-state';
 
 interface CartItem {
   title: string;
@@ -12,21 +13,24 @@ interface CartState {
   mealItems: MealRequestResponse[];
   cartQuantity: number;
   isOpen: boolean;
+  total: number;
   openCart: () => void;
   closeCart: () => void;
   increaseCartQuantity: (title: string) => void;
   decreaseCartQuantity: (title: string) => void;
   removeFromCart: (title: string) => void;
   setMealItems: (newMealItems: MealRequestResponse[]) => void;
+  recomputeTotal: () => void;
 }
 
 export const useCartStore = create<CartState>()(
   persist(
-    set => ({
+    computed(set => ({
       cartItems: [],
       mealItems: [],
       cartQuantity: 0,
       isOpen: false,
+      total: 0,
 
       openCart: () => set(state => ({ isOpen: true })),
       closeCart: () => set(state => ({ isOpen: false })),
@@ -66,18 +70,33 @@ export const useCartStore = create<CartState>()(
           }
           return state;
         }),
-      removeFromCart: (title: string) =>
+      removeFromCart: (title: string) => {
         set(state => ({
           ...state,
           cartItems: state.cartItems.filter(item => item.title !== title),
           cartQuantity: state.cartQuantity - 1,
-        })),
-      setMealItems: newMealItems =>
+        }));
+      },
+      setMealItems: newMealItems => {
         set(state => ({
           ...state,
           mealItems: newMealItems,
-        })),
-    }),
+        }));
+      },
+      recomputeTotal: () =>
+        set(state => {
+          const newTotal = state.cartItems.reduce((acc, cartItem) => {
+            const mealItem = state.mealItems.find(
+              meal => meal.title === cartItem.title,
+            );
+            if (mealItem) {
+              return acc + cartItem.quantity * mealItem.price;
+            }
+            return acc;
+          }, 0);
+          return { ...state, total: newTotal };
+        }),
+    })),
     { name: 'cart-store' },
   ),
 );
