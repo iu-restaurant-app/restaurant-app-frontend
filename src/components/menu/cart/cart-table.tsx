@@ -2,7 +2,8 @@
 import CartItem from '@/components/menu/cart/cart-item';
 import { useCartStore } from '@/hooks/useCartStorage';
 import InputField from '@/components/common/input-field';
-import Select from '@/components/common/select';
+import Select from '@/components/menu/cart/select';
+import OrderButton from '@/components/menu/cart/order-button';
 
 export default function CartTable() {
   const { closeCart, cartItems, cartQuantity, total } = useCartStore(
@@ -52,17 +53,19 @@ export default function CartTable() {
                   <InputField>Comment on the order</InputField>
                 </td>
               </tr>
-              <tr className="bg-default-50 h-[80px] w-full border-b justify-items-center grid grid-cols-1">
-                <td className="col-span-1 flex items-center">
+              <tr className="bg-default-50 h-[80px] w-full border-b justify-items-start grid grid-cols-1">
+                <td className="col-span-1 flex items-center justify-start justify-items-start m-4">
                   <Select />
                 </td>
               </tr>
-              <tr className="bg-default-50 h-[80px] w-full justify-items-center grid grid-cols-3 content-center items-center font-semibold text-gray-900">
-                <th scope="row" className="px-6 py-3 text-base">
+              <tr className="bg-default-50 h-[80px] w-full justify-items-center grid grid-cols-4 content-center items-center font-semibold text-gray-900">
+                <th scope="row" className="px-6 py-3 text-xs uppercase">
                   Total:
                 </th>
-                <td className="px-6 py-3">{cartQuantity}</td>
-                <td className="px-6 py-3">{total}</td>
+                <td className="px-6 py-3">{total}$</td>
+                <td className="col-span-2 px-6 py-3">
+                  <OrderButton />
+                </td>
               </tr>
             </>
           ) : (

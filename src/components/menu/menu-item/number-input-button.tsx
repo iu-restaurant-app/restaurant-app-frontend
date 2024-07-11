@@ -11,7 +11,7 @@ export default function NumberInputButton(props: NumberInputButtonProps) {
   return (
     <div className="inline-flex items-stretch w-full">
       <div className="inline-flex w-full">
-        <div className="flex items-stretch justify-between w-full">
+        <div className="flex items-stretch justify-between w-full bg-default-600 rounded-lg">
           <div className="flex items-stretch">
             <button
               type="button"

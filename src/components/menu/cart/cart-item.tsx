@@ -23,7 +23,7 @@ export default function CartItem(props: CartItemProps) {
         <div className="h-15 overflow-hidden">
           <img
             src={item.image}
-            className="rounded-lg object-cover h-[75px] w-[75px]"
+            className="rounded-lg object-cover md:h-[65px] md:w-[65px] h-[45px] w-[45px]"
             alt={props.title}
           />
         </div>
