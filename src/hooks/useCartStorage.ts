@@ -1,7 +1,8 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { MealRequestResponse } from '@/api/meal/request/meal-request-response';
-import { computed } from 'zustand-computed-state';
+import { compute, computed } from 'zustand-computed-state';
+import { state } from 'sucrase/dist/types/parser/traverser/base';
 
 interface CartItem {
   title: string;
@@ -20,17 +21,17 @@ interface CartState {
   decreaseCartQuantity: (title: string) => void;
   removeFromCart: (title: string) => void;
   setMealItems: (newMealItems: MealRequestResponse[]) => void;
-  recomputeTotal: () => void;
+  clearCart: () => void;
 }
 
 export const useCartStore = create<CartState>()(
   persist(
-    computed(set => ({
+    computed((set, get) => ({
       cartItems: [],
       mealItems: [],
       cartQuantity: 0,
       isOpen: false,
-      total: 0,
+      // total: 0,
 
       openCart: () => set(state => ({ isOpen: true })),
       closeCart: () => set(state => ({ isOpen: false })),
@@ -83,19 +84,24 @@ export const useCartStore = create<CartState>()(
           mealItems: newMealItems,
         }));
       },
-      recomputeTotal: () =>
-        set(state => {
-          const newTotal = state.cartItems.reduce((acc, cartItem) => {
-            const mealItem = state.mealItems.find(
-              meal => meal.title === cartItem.title,
-            );
-            if (mealItem) {
-              return acc + cartItem.quantity * mealItem.price;
-            }
-            return acc;
-          }, 0);
-          return { ...state, total: newTotal };
-        }),
+      clearCart: () =>
+        set(state => ({
+          ...state,
+          cartItems: [],
+          cartQuantity: 0,
+          isOpen: false,
+        })),
+      ...compute(get, state => ({
+        total: state.cartItems.reduce((acc, cartItem) => {
+          const mealItem = state.mealItems.find(
+            meal => meal.title === cartItem.title,
+          );
+          if (mealItem) {
+            return acc + cartItem.quantity * mealItem.price;
+          }
+          return acc;
+        }, 0),
+      })),
     })),
     { name: 'cart-store' },
   ),

@@ -13,7 +13,6 @@ export default function CartItem(props: CartItemProps) {
     increaseCartQuantity,
     decreaseCartQuantity,
     mealItems,
-    recomputeTotal,
   } = useCartStore(state => state);
   const item = mealItems.find(i => i.title == props.title);
   if (item == null) return null;
@@ -38,11 +37,9 @@ export default function CartItem(props: CartItemProps) {
             whenAmountBelowOne={() => removeFromCart(props.title)}
             decreaseFunction={() => {
               decreaseCartQuantity(props.title);
-              recomputeTotal();
             }}
             increaseFunction={() => {
               increaseCartQuantity(props.title);
-              recomputeTotal();
             }}
           />
         </div>

@@ -17,7 +17,6 @@ export default function MenuItem(props: MenuItemProps) {
     increaseCartQuantity,
     decreaseCartQuantity,
     removeFromCart,
-    recomputeTotal,
     closeCart,
     cartItems,
     cartQuantity,
@@ -52,7 +51,6 @@ export default function MenuItem(props: MenuItemProps) {
             <AddToCartButton
               onClick={() => {
                 increaseCartQuantity(props.title);
-                recomputeTotal();
               }}
               price={props.price}
             />
@@ -60,16 +58,13 @@ export default function MenuItem(props: MenuItemProps) {
             <NumberInputButton
               whenAmountBelowOne={() => {
                 removeFromCart(props.title);
-                recomputeTotal();
                 if (cartQuantity <= 1) closeCart();
               }}
               decreaseFunction={() => {
                 decreaseCartQuantity(props.title);
-                recomputeTotal();
               }}
               increaseFunction={() => {
                 increaseCartQuantity(props.title);
-                recomputeTotal();
               }}
               count={quantity}
             />

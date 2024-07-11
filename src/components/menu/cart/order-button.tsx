@@ -1,8 +1,14 @@
+import { useCartStore } from '@/hooks/useCartStorage';
+
 export default function OrderButton() {
+  const { clearCart } = useCartStore(state => state);
   return (
     <button
-      type="submit"
+      type="button"
       className="text-white bg-default-600 hover:bg-default-700 transition-colors duration-300 ease-in-out font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
+      onClick={() => {
+        clearCart();
+      }}
     >
       Order
       <svg
