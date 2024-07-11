@@ -1,3 +1,4 @@
+'use client';
 interface CartIconProps {
   onclick: () => void;
   quantity: number;
@@ -11,7 +12,7 @@ export default function CartIcon(props: CartIconProps) {
       onClick={props.onclick}
     >
       <svg
-        className="w-6 h-6 text-default-600 dark:text-white"
+        className="w-6 h-6 text-default-600"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -26,7 +27,7 @@ export default function CartIcon(props: CartIconProps) {
         />
       </svg>
       <span className="sr-only">Notifications</span>
-      <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-default-600 border-2 border-white rounded-full -top-1 -end-1 dark:border-gray-900">
+      <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-default-600 border-2 border-white rounded-full -top-1 -end-1">
         {props.quantity}
       </div>
     </button>

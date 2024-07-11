@@ -1,5 +1,6 @@
+'use client';
 import NumberInputButton from '@/components/menu/menu-item/number-input-button';
-import { useShoppingCart } from '@/context/ShoppingCartContext';
+import { useCartStore } from '@/hooks/useCartStorage';
 
 interface CartItemProps {
   title: string;
@@ -9,10 +10,10 @@ interface CartItemProps {
 export default function CartItem(props: CartItemProps) {
   const {
     removeFromCart,
-    mealItems,
     increaseCartQuantity,
     decreaseCartQuantity,
-  } = useShoppingCart();
+    mealItems,
+  } = useCartStore(state => state);
   const item = mealItems.find(i => i.title == props.title);
   if (item == null) return null;
   return (
@@ -26,7 +27,7 @@ export default function CartItem(props: CartItemProps) {
           />
         </div>
       </td>
-      <td className="flex px-6 py-4 font-semibold text-gray-900 dark:text-white text-center items-center justify-center">
+      <td className="flex px-6 py-4 font-semibold text-gray-900 text-center items-center justify-center">
         {props.title}
       </td>
       <td className="flex px-6 py-4 justify-center self-center">
@@ -39,7 +40,7 @@ export default function CartItem(props: CartItemProps) {
           />
         </div>
       </td>
-      <td className="flex items-center justify-center px-6 py-4 font-semibold text-gray-900 dark:text-white text-center">
+      <td className="flex items-center justify-center px-6 py-4 font-semibold text-gray-900 text-center">
         {item.price * props.quantity + '$'}
       </td>
     </>

@@ -22,7 +22,7 @@ export default function Story() {
   return (
     <div>
       <section className="@apply flex min-h-screen flex-col items-center justify-center bg-fixed bg-[url('/palace.jpeg')] bg-center bg-cover text-black] gap-y-16 text-center">
-        <div className="w-2xl bg-red-900 opacity-95 border border-red-900 shadow dark:bg-gray-800 dark:border-gray-700 m-auto pt-4 pb-4 pl-24 pr-24">
+        <div className="w-2xl bg-red-900 opacity-95 border border-red-900 shadow m-auto pt-4 pb-4 pl-24 pr-24">
           <h1 className="text-white text-8xl font-serif">Pasta Palace</h1>
         </div>
       </section>
@@ -47,11 +47,11 @@ export default function Story() {
       </section>
 
       <section className="@apply bg-gray-50/40 flex min-h-screen flex-col items-center justify-center bg-fixed bg-[url('/italianFood.jpg')] bg-center bg-cover text-black] gap-y-16 text-center bg-white">
-        <div className="max-w-2xl bg-yellow-100 border border-yellow-100 rounded-3xl shadow dark:bg-gray-800 dark:border-gray-700 ml-96">
+        <div className="max-w-2xl bg-yellow-100 border border-yellow-100 rounded-3xl shadow ml-96">
           <div className="p-5">
             <h3 className="text-4xl font-serif text-red-900">Our goal</h3>
             <br />
-            <p className="mb-3 font-normal text-red-900 dark:text-gray-400 font-serif text-xl">
+            <p className="mb-3 font-normal text-red-900 font-serif text-xl">
               At Pasta Palace, our goal is simple - to transport you to the
               cobblestone streets of Italy with every dish we serve. We strive
               to bring the authentic flavors and traditions of Italian cuisine
@@ -61,11 +61,11 @@ export default function Story() {
           </div>
         </div>
 
-        <div className="max-w-2xl bg-yellow-100 border border-yellow-100 rounded-3xl shadow dark:bg-gray-800 dark:border-gray-700 mr-96 mt-24">
+        <div className="max-w-2xl bg-yellow-100 border border-yellow-100 rounded-3xl shadow mr-96 mt-24">
           <div className="p-5">
             <h3 className="text-4xl font-serif text-red-900">Our purpose</h3>
             <br />
-            <p className="mb-3 font-normal text-red-900 dark:text-gray-400 font-serif text-xl">
+            <p className="mb-3 font-normal text-red-900 font-serif text-xl">
               Beyond serving incredible food, Pasta Palace is a place where
               friends and families come together to share laughter, stories, and
               of course, amazing pasta. We believe in the power of food to bring
