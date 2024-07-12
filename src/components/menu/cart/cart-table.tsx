@@ -12,7 +12,7 @@ export default function CartTable() {
 
   return (
     <>
-      <div className="fixed top-0 right-0 w-[400px] md:w-[500px] grid grid-cols-4 h-screen ">
+      <div className="fixed top-0 right-0 w-[400px] md:w-[500px] grid grid-cols-4 h-screen z-20">
         <table className="col-start-2 col-span-3 text-sm text-gray-500 shadow-md bg-default-50">
           <thead className="text-xs text-gray-700 uppercase bg-default-50">
             <tr className="grid grid-cols-5 content-center place-items-center items-center bg-default-50 border-b ">

@@ -1,6 +1,7 @@
 'use client';
 import NumberInputButton from '@/components/menu/menu-item/number-input-button';
 import { useCartStore } from '@/hooks/useCartStorage';
+import { useMealStore } from '@/hooks/useMealStorage';
 
 interface CartItemProps {
   title: string;
@@ -8,12 +9,9 @@ interface CartItemProps {
 }
 
 export default function CartItem(props: CartItemProps) {
-  const {
-    removeFromCart,
-    increaseCartQuantity,
-    decreaseCartQuantity,
-    mealItems,
-  } = useCartStore(state => state);
+  const { removeFromCart, increaseCartQuantity, decreaseCartQuantity } =
+    useCartStore(state => state);
+  const { mealItems } = useMealStore(state => state);
   const item = mealItems.find(i => i.title == props.title);
   if (item == null) return null;
   return (

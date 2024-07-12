@@ -26,8 +26,12 @@ export default function MenuItem(props: MenuItemProps) {
     cartItems.find(item => item.title === props.title)?.quantity || 0;
 
   return (
-    <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow grid grid-rows-2 max-h-[550px]">
-      <img className="rounded-t-lg" src={props.image} alt={props.title} />
+    <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow grid grid-rows-2 max-h-[900px]">
+      <img
+        className="rounded-t-lg max-h-[400px]"
+        src={props.image}
+        alt={props.title}
+      />
 
       <div className="p-5">
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">

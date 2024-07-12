@@ -6,7 +6,7 @@ export default function CartIcon() {
   return (
     <button
       type="button"
-      className="absolute inline-flex items-center p-3 text-sm font-medium text-center text-white bg-white rounded-full hover:bg-default-100 shadow-md shadow-gray-200 right-5 top-5"
+      className="absolute inline-flex items-center p-3 text-sm font-medium text-center text-white bg-white rounded-full hover:bg-default-100 hover:shadow-md hover:shadow-gray-200 right-4 top-3"
       onClick={openCart}
     >
       <svg

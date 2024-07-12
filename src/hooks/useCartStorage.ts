@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { compute, computed } from 'zustand-computed-state';
-import { MealRequestResponse } from '@/api/meal/body/meal-request-response';
+import { useMealStore } from '@/hooks/useMealStorage';
 
 interface CartItem {
   title: string;
@@ -10,7 +10,6 @@ interface CartItem {
 
 interface CartState {
   cartItems: CartItem[];
-  mealItems: MealRequestResponse[];
   cartQuantity: number;
   isOpen: boolean;
   total: number;
@@ -19,7 +18,6 @@ interface CartState {
   increaseCartQuantity: (title: string) => void;
   decreaseCartQuantity: (title: string) => void;
   removeFromCart: (title: string) => void;
-  setMealItems: (newMealItems: MealRequestResponse[]) => void;
   clearCart: () => void;
 }
 
@@ -30,7 +28,6 @@ export const useCartStore = create<CartState>()(
       mealItems: [],
       cartQuantity: 0,
       isOpen: false,
-      // total: 0,
 
       openCart: () => set(state => ({ isOpen: true })),
       closeCart: () => set(state => ({ isOpen: false })),
@@ -77,12 +74,6 @@ export const useCartStore = create<CartState>()(
           cartQuantity: state.cartQuantity - 1,
         }));
       },
-      setMealItems: newMealItems => {
-        set(state => ({
-          ...state,
-          mealItems: newMealItems,
-        }));
-      },
       clearCart: () =>
         set(state => ({
           ...state,
@@ -92,7 +83,8 @@ export const useCartStore = create<CartState>()(
         })),
       ...compute(get, state => ({
         total: state.cartItems.reduce((acc, cartItem) => {
-          const mealItem = state.mealItems.find(
+          const mealItems = useMealStore.getState().mealItems;
+          const mealItem = mealItems.find(
             meal => meal.title === cartItem.title,
           );
           if (mealItem) {

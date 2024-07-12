@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { MealRequestResponse } from '@/api/meal/body/meal-request-response';
 import MealService from '@/api/meal/service/meal-service';
 import ByteArrayToImage from '@/utils/byte-array-to-image';
 import MenuItem, { MenuItemProps } from '@/components/menu/menu-item/menu-item';
+import { useMealStore } from '@/hooks/useMealStorage';
 
 enum PageState {
   LOADING,
@@ -15,7 +15,8 @@ enum PageState {
 export default function MenuGallery() {
   const [pageState, setPageState] = useState<PageState>(PageState.LOADING);
   const [error, setError] = useState<number>();
-  const [meals, setMeals] = useState<MealRequestResponse[]>([]);
+  // const [meals, setMeals] = useState<MealRequestResponse[]>([]);
+  const { mealItems, setMealItems } = useMealStore(state => state);
   const dictionary: Record<string, number> = {
     ERR_NETWORK: 502,
     BAD_REQUEST: 400,
@@ -27,7 +28,8 @@ export default function MenuGallery() {
         response.forEach(item => {
           item.image = ByteArrayToImage(item.image);
         });
-        setMeals(response);
+        // setMeals(response);
+        setMealItems(response);
         setPageState(PageState.SUCCESS);
       })
       .catch(error => {
@@ -45,7 +47,7 @@ export default function MenuGallery() {
   return (
     <>
       {(pageState === PageState.LOADING && (
-        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-[100px]">
+        <div className="z-0 grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-[100px]">
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((index: number) => (
             <div
               key={index}
@@ -113,7 +115,7 @@ export default function MenuGallery() {
         )) ||
         (pageState === PageState.SUCCESS && (
           <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-[100px]">
-            {meals.map((item: MenuItemProps, index: number) => (
+            {mealItems.map((item: MenuItemProps, index: number) => (
               <MenuItem
                 key={index}
                 title={item.title}

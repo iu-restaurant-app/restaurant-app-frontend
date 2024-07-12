@@ -1,35 +1,24 @@
 'use client';
-import React, { useState } from 'react';
+
+import Gallery from '@/components/menu/gallery';
 import MenuSearch from '@/components/menu/menu-search';
 import MenuGallery from '@/components/menu/menu-gallery';
-import Gallery from '@/components/menu/gallery';
 import ScrollToTopButton from '@/components/common/scroll-to-top-button';
+import React, { useState } from 'react';
+import Navbar from '@/components/common/navbar';
+import Sidebar from '@/components/common/sidebar';
+import CartTable from '@/components/menu/cart/cart-table';
+import { motion } from 'framer-motion';
+import { useCartStore } from '@/hooks/useCartStorage';
 
-const MainComponent: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const closeSidebar = () => {
-    setIsOpen(false);
-  };
+export default function Home() {
+  const [isOpenSidebar, setIsOpenSidebar] = useState(false);
+  const { isOpen } = useCartStore(state => state);
 
   return (
     <>
-      {/*<div className="flex flex-col min-h-screen">
-        <Navbar isOpen={isOpen} toggleSidebar={toggleSidebar} />
-        <div className="flex flex-1">
-          {isOpen && (
-            <div
-              className="fixed inset-0 bg-gray-800 opacity-50 z-30"
-              onClick={closeSidebar}
-            ></div>
-          )}
-          <Sidebar isOpen={isOpen} onClose={closeSidebar} />
-        </div>
-      </div>*/}
+      <Navbar isOpen={isOpenSidebar} setIsOpen={setIsOpenSidebar} />
+      <Sidebar isOpen={isOpenSidebar} setIsOpen={setIsOpenSidebar} />
       <Gallery />
       <MenuSearch />
       <MenuGallery />
@@ -37,8 +26,14 @@ const MainComponent: React.FC = () => {
         color={'bg-default-800'}
         onHoverColor={'bg-default-900'}
       />
+      <motion.div
+        initial={{ x: '500px' }}
+        animate={{ x: isOpen ? '0' : '500px' }}
+        transition={{ duration: 0.5, ease: 'easeInOut' }}
+        className={'fixed top-0 right-0 w-[400px] md:w-[500px] h-screen'}
+      >
+        <CartTable />
+      </motion.div>
     </>
   );
-};
-
-export default MainComponent;
+}
