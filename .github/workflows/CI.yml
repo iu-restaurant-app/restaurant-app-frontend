@@ -1,6 +1,6 @@
 name: Continuous Integration
 on:
-  push:
+  pull_request:
     branches: [ main ]
 jobs:
   build:
@@ -8,18 +8,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20.12.2'
-      - name: Install dependencies
-        run: npm install
-      - name: Build
-        run: npm run build
-      - name: Lint
-        run: npm run lint
-      - name: Deploy to Github Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
+
+      - name: Authorize in Docker
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build Docker container
+        run: docker build --platform linux/amd64 -t almaxgood/restaurant-app-frontend:temp .
+
+      - name: Push Docker container
+        run: docker push almaxgood/restaurant-app-frontend:temp
