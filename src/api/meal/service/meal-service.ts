@@ -2,7 +2,7 @@ import axios from 'axios';
 import { MealRequestResponse } from '@/api/meal/body/meal-request-response';
 
 export default class MealService {
-  static readonly MEAL_SERVICE_BASE_URL = 'http://10.90.137.110:8080/meal';
+  static readonly MEAL_SERVICE_BASE_URL = 'http://31.129.98.43:8080/meal';
 
   static getAll(): Promise<MealRequestResponse[]> {
     return new Promise((resolve, reject) => {
