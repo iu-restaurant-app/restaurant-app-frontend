@@ -4,7 +4,8 @@ import React from 'react';
 
 export const metadata: Metadata = {
   title: 'Pasta Palace',
-  description: 'Pizza Pasta',
+  description:
+    'Italian restaurant with the best assortment of tasty pasta and pizza',
 };
 
 export default function RootLayout({
