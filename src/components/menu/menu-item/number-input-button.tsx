@@ -1,34 +1,34 @@
 'use client';
-import { useState } from 'react';
 
 interface NumberInputButtonProps {
   whenAmountBelowOne: () => void;
+  decreaseFunction: () => void;
+  increaseFunction: () => void;
+  count: number;
 }
 
 export default function NumberInputButton(props: NumberInputButtonProps) {
-  const [count, setCount] = useState(1);
-
   return (
     <div className="inline-flex items-stretch w-full">
-      <form className="inline-flex w-full">
-        <div className="flex items-stretch justify-between w-full">
+      <div className="inline-flex w-full">
+        <div className="flex items-stretch justify-between w-full bg-default-600 rounded-lg">
           <div className="flex items-stretch">
             <button
               type="button"
               id="decrement-button"
               data-input-counter-decrement="quantity-input"
-              className="bg-default-600 flex items-center justify-center dark:bg-default-700 dark:hover:bg-default-600 rounded-s-lg p-1 focus:outline-none group"
+              className="bg-default-600 flex items-center justify-center rounded-s-lg p-1 focus:outline-none group"
               onClick={() => {
-                if (count === 1) {
+                if (props.count === 1) {
                   props.whenAmountBelowOne();
                 } else {
-                  setCount(count - 1);
+                  props.decreaseFunction();
                 }
               }}
             >
-              <div className="p-1 rounded-lg bg-default-600 transition-colors duration-300 ease-in-out group-hover:bg-default-950">
+              <span className="p-1 rounded-lg bg-default-600 transition-colors duration-300 ease-in-out group-hover:bg-default-950">
                 <svg
-                  className="w-3 h-3 text-white transition-colors duration-300 ease-in-out dark:text-default-50"
+                  className="w-3 h-3 text-white transition-colors duration-300 ease-in-out"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -42,16 +42,16 @@ export default function NumberInputButton(props: NumberInputButtonProps) {
                     d="M1 1h16"
                   />
                 </svg>
-              </div>
+              </span>
             </button>
           </div>
           <div className="flex content-center items-stretch bg-default-600">
             <span
               id="quantity"
               aria-describedby="helper-text-explanation"
-              className="text-white px-2 bg-default-600 border-x-0 text-center text-sm flex py-1 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 w-7 content-center justify-center self-center"
+              className="text-white px-2 bg-default-600 border-x-0 text-center text-sm flex py-1 w-7 content-center justify-center self-center"
             >
-              {count}
+              {props.count}
             </span>
           </div>
           <div className="flex items-stretch content-center">
@@ -59,14 +59,14 @@ export default function NumberInputButton(props: NumberInputButtonProps) {
               type="button"
               id="increment-button"
               data-input-counter-increment="quantity-input"
-              className="flex items-center justify-center bg-default-600 dark:bg-default-700 dark:hover:bg-default-600 rounded-e-lg p-1 focus:outline-none group"
+              className="flex items-center justify-center bg-default-600 rounded-e-lg p-1 focus:outline-none group"
             >
-              <div
+              <span
                 className="transition-colors duration-300 ease-in-out p-1 rounded-lg bg-default-600 group-hover:bg-default-950"
-                onClick={() => setCount(count + 1)}
+                onClick={props.increaseFunction}
               >
                 <svg
-                  className="transition-colors duration-300 ease-in-out w-3 h-3 text-white dark:text-default-50 "
+                  className="transition-colors duration-300 ease-in-out w-3 h-3 text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -80,11 +80,11 @@ export default function NumberInputButton(props: NumberInputButtonProps) {
                     d="M9 1v16M1 9h16"
                   />
                 </svg>
-              </div>
+              </span>
             </button>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
