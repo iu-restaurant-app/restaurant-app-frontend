@@ -1,8 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { MealRequestResponse } from '@/api/meal/request/meal-request-response';
 import { compute, computed } from 'zustand-computed-state';
-import { state } from 'sucrase/dist/types/parser/traverser/base';
+import { MealRequestResponse } from '@/api/meal/body/meal-request-response';
 
 interface CartItem {
   title: string;

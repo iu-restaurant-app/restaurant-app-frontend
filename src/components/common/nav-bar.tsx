@@ -1,5 +1,5 @@
 import React from 'react';
-import SideBarButton from '@/components/side-bar-button';
+import SideBarButton from '@/components/common/side-bar-button';
 
 interface NavbarProps {
   isOpen: boolean;

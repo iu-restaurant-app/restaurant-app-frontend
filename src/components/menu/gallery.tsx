@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // taken from: https://stackademic.com/blog/creating-a-responsive-image-carousel-in-next-js-a-step-by-step-guide and https://www.youtube.com/watch?v=hOqdEBkP-q0
 
 export default function Gallery() {

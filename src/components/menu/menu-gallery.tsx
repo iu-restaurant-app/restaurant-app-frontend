@@ -1,10 +1,10 @@
 'use client';
 
-import MenuItem, { MenuItemProps } from '@/components/menu-item';
 import { useEffect, useState } from 'react';
 import { MealRequestResponse } from '@/api/meal/body/meal-request-response';
 import MealService from '@/api/meal/service/meal-service';
 import ByteArrayToImage from '@/utils/byte-array-to-image';
+import MenuItem, { MenuItemProps } from '@/components/menu/menu-item/menu-item';
 
 enum PageState {
   LOADING,
@@ -102,7 +102,7 @@ export default function MenuGallery() {
                   Sorry, something went wrong. Try again later.{' '}
                 </p>
                 <a
-                  href="/"
+                  href="/public"
                   className="inline-flex text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-4"
                 >
                   Back to Homepage

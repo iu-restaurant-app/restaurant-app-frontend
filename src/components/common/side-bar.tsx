@@ -32,7 +32,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           <div className="flex items-center mt-4">
             <FaHome className="text-gray-800" />
             <Link
-              href="/"
+              href="/public"
               className="ml-3 font-bold text-gray-800 hover:text-gray-600"
               onClick={onClose}
             >

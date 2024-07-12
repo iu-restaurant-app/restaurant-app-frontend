@@ -23,14 +23,14 @@ const SearchComponent = () => {
       <form className="mx-auto">
         <label
           htmlFor="default-search"
-          className="mb-4 text-sm font-medium text-gray-900 sr-only dark:text-white"
+          className="mb-4 text-sm font-medium text-gray-900 sr-only"
         >
           Search
         </label>
         <div className="relative">
           <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
             <svg
-              className="w-4 h-4 text-gray-500 dark:text-gray-400"
+              className="w-4 h-4 text-gray-500"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -54,7 +54,7 @@ const SearchComponent = () => {
           />
           <button
             type="submit"
-            className="text-white absolute end-2.5 bottom-2.5 bg-default-600 hover:bg-default-800 focus:ring-4 focus:outline-none focus:ring-default-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-default-600 dark:hover:bg-default-700 dark:focus:ring-default-800"
+            className="text-white absolute end-2.5 bottom-2.5 bg-default-600 hover:bg-default-800 focus:ring-4 focus:outline-none focus:ring-default-300 font-medium rounded-lg text-sm px-4 py-2"
           >
             Search
           </button>

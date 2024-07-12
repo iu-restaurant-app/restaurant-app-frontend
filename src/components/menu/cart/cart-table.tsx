@@ -4,7 +4,6 @@ import { useCartStore } from '@/hooks/useCartStorage';
 import InputField from '@/components/common/input-field';
 import Select from '@/components/menu/cart/select';
 import OrderButton from '@/components/menu/cart/order-button';
-import { Toaster } from 'react-hot-toast';
 
 export default function CartTable() {
   const { closeCart, cartItems, cartQuantity, total } = useCartStore(
