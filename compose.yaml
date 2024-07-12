@@ -1,0 +1,8 @@
+name: restaurant-app-frontend
+
+services:
+  restaurant-app-frontend:
+    image: 'restaurant-app-frontend'
+    container_name: 'restaurant-app-frontend'
+    ports:
+      - '3000:3000'
