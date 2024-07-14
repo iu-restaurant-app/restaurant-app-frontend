@@ -14,6 +14,7 @@ export default function Gallery() {
     { image: '/gal7.jpeg' },
     { image: '/gal8.jpeg' },
   ];
+
   useEffect(() => {
     const autoplay = setInterval(() => {
       nextSlide();
@@ -32,6 +33,14 @@ export default function Gallery() {
         name="viewport"
         content="width=device-width,height=device-height,initial-scale=1.0"
       />
+      <img className="w-0 h-0" src="/gal1.jpeg" alt="gallery-1" />
+      <img className="w-0 h-0" src="/gal2.jpeg" alt="gallery-2" />
+      <img className="w-0 h-0" src="/gal3.jpeg" alt="gallery-3" />
+      <img className="w-0 h-0" src="/gal4.jpeg" alt="gallery-4" />
+      <img className="w-0 h-0" src="/gal5.jpeg" alt="gallery-5" />
+      <img className="w-0 h-0" src="/gal6.jpeg" alt="gallery-6" />
+      <img className="w-0 h-0" src="/gal7.jpeg" alt="gallery-7" />
+      <img className="w-0 h-0" src="/gal8.jpeg" alt="gallery-8" />
       <div className="w-screen h-auto m-auto">
         <div
           style={{ backgroundImage: `url(${data[currentImg].image})` }}
