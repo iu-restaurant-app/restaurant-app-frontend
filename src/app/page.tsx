@@ -10,6 +10,7 @@ import Sidebar from '@/components/common/sidebar';
 import CartTable from '@/components/menu/cart/cart-table';
 import { motion } from 'framer-motion';
 import { useCartStore } from '@/hooks/useCartStorage';
+import SEO from '@/components/common/seo';
 
 export default function Home() {
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
@@ -17,6 +18,12 @@ export default function Home() {
 
   return (
     <>
+      <SEO
+        title={'Pasta Palace Menu'}
+        description={
+          'Page with menu where everyone can order something they will like'
+        }
+      />
       <Navbar isOpen={isOpenSidebar} setIsOpen={setIsOpenSidebar} />
       <Sidebar isOpen={isOpenSidebar} setIsOpen={setIsOpenSidebar} />
       <Gallery />
