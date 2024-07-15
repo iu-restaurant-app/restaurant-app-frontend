@@ -13,10 +13,10 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build --platform linux/amd64 -t almaxgood/restaurant-app-frontend .
+        run: docker build --platform linux/amd64 -t almaxgood/restaurant-app-frontend:latest .
 
       - name: Push Docker image
-        run: docker push almaxgood/restaurant-app-frontend
+        run: docker push almaxgood/restaurant-app-frontend:latest
 
       - name: Install sshpass
         run: sudo apt install sshpass
