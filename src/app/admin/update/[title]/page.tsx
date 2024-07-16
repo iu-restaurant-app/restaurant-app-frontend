@@ -20,7 +20,6 @@ function Page() {
         initialPrice={0}
         initialImage={''}
         initialCalories={0}
-        key={0}
       ></InputForm>
     </>
   );

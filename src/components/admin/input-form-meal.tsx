@@ -15,7 +15,7 @@ export default function UpdatePage({
   initialTitle = '',
   initialDescription = '',
   initialPrice,
-  initialCalories = 0,
+  initialCalories,
   initialImage = '',
 }: FormItemProps) {
   const [title, setTitle] = React.useState(initialTitle);
@@ -92,13 +92,14 @@ export default function UpdatePage({
               Calories
             </label>
             <input
-              type="number"
+              type="text"
               id="number-input"
               value={calories}
               onChange={e => setCalories(Number(e.target.value))}
               aria-describedby="helper-text-explanation"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-default-600 focus:border-default-600 block w-full p-2.5 outline-0"
-              placeholder="370"
+              placeholder="367"
+              pattern="^[1-9]\d*$"
               required
             />
           </div>
@@ -110,13 +111,14 @@ export default function UpdatePage({
               Price
             </label>
             <input
-              type="number"
+              type="text"
               id="number-input"
               value={price}
               onChange={e => setPrice(Number(e.target.value))}
               aria-describedby="helper-text-explanation"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-default-600 focus:border-default-600 block w-full p-2.5 outline-0"
-              placeholder="130"
+              placeholder="24"
+              pattern="^[1-9]\d*$"
               required
             />
           </div>
