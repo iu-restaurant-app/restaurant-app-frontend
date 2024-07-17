@@ -6,6 +6,8 @@ import ByteArrayToImage from '@/utils/byte-array-to-image';
 import MenuItem, { MenuItemProps } from '@/components/menu/menu-item/menu-item';
 import { useMealStore } from '@/hooks/useMealStorage';
 import MenuSearch from '@/components/menu/menu-search';
+import ErrorPage from '@/components/common/error-page';
+import resolveError from '@/utils/resolve-error';
 
 enum PageState {
   LOADING,
@@ -15,7 +17,7 @@ enum PageState {
 
 export default function MenuGallery() {
   const [pageState, setPageState] = useState<PageState>(PageState.LOADING);
-  const [error, setError] = useState<number>();
+  const [error, setError] = useState<number>(0);
   const { mealItems, setMealItems } = useMealStore(state => state);
   const [filteredMealItems, setFilteredMealItems] =
     useState<MenuItemProps[]>(mealItems);
@@ -31,11 +33,6 @@ export default function MenuGallery() {
       );
       setFilteredMealItems(filteredItems);
     }
-  };
-
-  const dictionary: Record<string, number> = {
-    ERR_NETWORK: 502,
-    BAD_REQUEST: 400,
   };
 
   useEffect(() => {
