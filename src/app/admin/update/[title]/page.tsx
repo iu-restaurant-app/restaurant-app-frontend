@@ -16,10 +16,10 @@ export default function Home() {
       <InputForm
         formTitle={`Update ${title}`}
         initialTitle={title as string}
-        initialDescription={''}
-        initialPrice={0}
-        initialImage={''}
-        initialCalories={0}
+        initialDescription=""
+        initialPrice=""
+        initialImage=""
+        initialCalories=""
       ></InputForm>
     </>
   );

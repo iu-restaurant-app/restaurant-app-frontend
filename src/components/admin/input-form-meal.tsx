@@ -6,8 +6,8 @@ interface FormItemProps {
   formTitle: string;
   initialTitle: string;
   initialDescription: string;
-  initialPrice: number;
-  initialCalories: number;
+  initialPrice: string;
+  initialCalories: string;
   initialImage: string;
 }
 
@@ -61,7 +61,7 @@ export default function UpdatePage(props: FormItemProps) {
               value={title}
               onChange={e => setTitle(e.target.value)}
               className="block w-full p-4 text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-default-600 focus:border-default-600 outline-0"
-              placeholder="Pizza Margarita"
+              placeholder="Write title here..."
               required
             />
           </div>
@@ -79,7 +79,6 @@ export default function UpdatePage(props: FormItemProps) {
               className="block p-2.5 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-default-600 focus:border-default-600 outline-0"
               placeholder="Write description for meal here..."
               maxLength={100}
-              required
             ></textarea>
           </div>
           <div>
@@ -93,12 +92,11 @@ export default function UpdatePage(props: FormItemProps) {
               type="text"
               id="number-input"
               value={calories}
-              onChange={e => setCalories(Number(e.target.value))}
+              onChange={e => setCalories(e.target.value)}
               aria-describedby="helper-text-explanation"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-default-600 focus:border-default-600 block w-full p-2.5 outline-0"
-              placeholder="367"
               pattern="^[1-9]\d*$"
-              required
+              placeholder="Write calories here..."
             />
           </div>
           <div>
@@ -112,12 +110,11 @@ export default function UpdatePage(props: FormItemProps) {
               type="text"
               id="number-input"
               value={price}
-              onChange={e => setPrice(Number(e.target.value))}
+              onChange={e => setPrice(e.target.value)}
               aria-describedby="helper-text-explanation"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-default-600 focus:border-default-600 block w-full p-2.5 outline-0"
-              placeholder="24"
               pattern="^[1-9]\d*$"
-              required
+              placeholder="Write price here..."
             />
           </div>
           <button
