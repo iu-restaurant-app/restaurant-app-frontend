@@ -4,6 +4,8 @@ import { useCartStore } from '@/hooks/useCartStorage';
 import InputField from '@/components/common/input-field';
 import Select from '@/components/menu/cart/select';
 import OrderButton from '@/components/menu/cart/order-button';
+import Overlay from '@/components/admin/overlay';
+import React from 'react';
 
 export default function CartTable() {
   const { closeCart, cartItems, cartQuantity, total } = useCartStore(
@@ -12,7 +14,7 @@ export default function CartTable() {
 
   return (
     <>
-      <div className="fixed top-0 right-0 w-[400px] md:w-[500px] grid grid-cols-4 h-screen z-20">
+      <div className="z-40 fixed top-0 right-0 w-[400px] md:w-[500px] grid grid-cols-4 h-screen">
         <table className="col-start-2 col-span-3 text-sm text-gray-500 shadow-md bg-default-50">
           <thead className="text-xs text-gray-700 uppercase bg-default-50">
             <tr className="grid grid-cols-5 content-center place-items-center items-center bg-default-50 border-b ">
@@ -54,7 +56,7 @@ export default function CartTable() {
                     <InputField>Comment on the order</InputField>
                   </td>
                 </tr>
-                <tr className="bg-default-50 h-[80px] w-full border-b justify-items-start grid grid-cols-1">
+                <tr className="bg-default-50 h-[100px] w-full border-b justify-items-start grid grid-cols-1">
                   <td className="col-span-1 flex items-center justify-start justify-items-start m-4">
                     <Select />
                   </td>

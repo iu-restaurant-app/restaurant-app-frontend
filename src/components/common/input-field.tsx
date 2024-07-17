@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 interface InputFieldProps {
   children: ReactNode;
@@ -13,7 +13,7 @@ export default function InputField(props: InputFieldProps) {
       <input
         type="text"
         id="large-input"
-        className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg text-base"
+        className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg text-base outline-0"
       />
     </div>
   );

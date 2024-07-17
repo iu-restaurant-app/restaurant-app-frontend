@@ -14,7 +14,7 @@ import SEO from '@/components/common/seo';
 
 export default function Home() {
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
-  const { isOpen } = useCartStore(state => state);
+  const { isOpen, closeCart } = useCartStore(state => state);
 
   return (
     <>
