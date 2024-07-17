@@ -47,7 +47,7 @@ export default function MenuGallery() {
   return (
     <>
       {(pageState === PageState.LOADING && (
-        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-[100px]">
+        <div className="grid gap-6 sm:grid-cols-1 sm:flex-col sm:justify-items-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-[100px]">
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((index: number) => (
             <div
               key={index}
@@ -115,7 +115,7 @@ export default function MenuGallery() {
           </section>
         )) ||
         (pageState === PageState.SUCCESS && (
-          <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-[100px]">
+          <div className="grid gap-6 sm:grid-cols-1 sm:flex-col sm:justify-items-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-[100px]">
             {mealItems.map((item: MenuItemProps, index: number) => (
               <MenuItem
                 key={index}
