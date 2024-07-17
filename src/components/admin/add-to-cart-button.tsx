@@ -2,7 +2,6 @@
 'use client';
 
 interface AddToCartButtonProps {
-  onClick: () => void;
   price: number;
 }
 
@@ -11,7 +10,6 @@ export default function AddToCartButton(props: AddToCartButtonProps) {
     <button
       type="button"
       className={`w-full inline-flex text-default-600 border border-default-600 font-medium rounded-lg text-sm px-2 py-2 items-center justify-between cursor-default`}
-      onClick={props.onClick}
     >
       <div className="inline-flex mr-2">
         <div className="mr-0.5">{props.price}</div>

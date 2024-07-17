@@ -16,7 +16,7 @@ import { toast } from 'react-hot-toast';
 
 export default function Home() {
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
-  const [isModalShown, setIsModalShown] = useState(true);
+  const [isModalShown, setIsModalShown] = useState(false);
   const { itemToDelete, setItemToDelete, mealItems, setMealItems } =
     useMealStore(state => state);
 
@@ -57,7 +57,7 @@ export default function Home() {
                 setMealItems(
                   mealItems.filter(item => item.title !== itemToDelete),
                 );
-                MealService.delete(itemToDelete).then(r =>
+                MealService.delete(itemToDelete).then(() =>
                   toast.success('Successfully deleted!'),
                 );
                 hideModal();
