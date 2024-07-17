@@ -19,4 +19,70 @@ export default class MealService {
         });
     });
   }
+
+  static get(title: string): Promise<MealRequestResponse> {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: 'get',
+        baseURL: this.MEAL_SERVICE_BASE_URL,
+        url: `/${title}`,
+      })
+        .then(response => {
+          resolve(response.data as MealRequestResponse);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  static create(meal: MealRequestResponse): Promise<void> {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: 'post',
+        baseURL: this.MEAL_SERVICE_BASE_URL,
+        url: '',
+        data: meal,
+      })
+        .then(response => {
+          resolve(response.data as void);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  static update(title: string, meal: MealRequestResponse): Promise<void> {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: 'patch',
+        baseURL: this.MEAL_SERVICE_BASE_URL,
+        url: `/${title}`,
+        data: meal,
+      })
+        .then(response => {
+          resolve(response.data as void);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  static delete(title: string): Promise<MealRequestResponse> {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: 'delete',
+        baseURL: this.MEAL_SERVICE_BASE_URL,
+        url: `/${title}`,
+      })
+        .then(response => {
+          resolve(response.data as MealRequestResponse);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
 }
