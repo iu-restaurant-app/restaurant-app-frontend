@@ -5,8 +5,8 @@ import { MealRequestResponse } from '@/api/meal/body/meal-request-response';
 interface MealState {
   mealItems: MealRequestResponse[];
   setMealItems: (newMealItems: MealRequestResponse[]) => void;
-  itemToDelete: string;
-  setItemToDelete: (item: string) => void;
+  itemToDelete: string | null;
+  setItemToDelete: (item: string | null) => void;
 }
 
 export const useMealStore = create<MealState>()(

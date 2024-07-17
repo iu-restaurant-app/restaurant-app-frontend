@@ -17,7 +17,7 @@ export default function AddToCartButton(props: AddToCartButtonProps) {
       </div>
       <div>
         <svg
-          className={`w-3 h-3 text-default-600 ${props.admin ? '' : 'transition-colors duration-300 ease-in-out group-hover:text-white'}`}
+          className={`w-3 h-3 text-default-600`}
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

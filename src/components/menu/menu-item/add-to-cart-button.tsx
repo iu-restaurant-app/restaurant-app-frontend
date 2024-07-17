@@ -3,11 +3,13 @@
 
 interface AddToCartButtonProps {
   price: number;
+  onClick: () => void;
 }
 
 export default function AddToCartButton(props: AddToCartButtonProps) {
   return (
     <button
+      onClick={props.onClick}
       type="button"
       className="w-full transition-colors duration-300 ease-in-out inline-flex text-default-600 hover:text-white border border-default-600 hover:bg-default-600 font-medium rounded-lg text-sm px-2 py-2 group items-center justify-between"
     >
