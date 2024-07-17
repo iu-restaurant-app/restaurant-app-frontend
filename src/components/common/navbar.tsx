@@ -4,6 +4,7 @@ import CartIcon from '@/components/menu/cart/cart-icon';
 interface NavbarProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  admin: boolean;
 }
 
 export default function Navbar(props: NavbarProps) {
@@ -36,7 +37,7 @@ export default function Navbar(props: NavbarProps) {
             />
           </svg>
         </button>
-        {cartQuantity > 0 && <CartIcon />}
+        {cartQuantity > 0 && !props.admin && <CartIcon />}
       </div>
     </nav>
   );
