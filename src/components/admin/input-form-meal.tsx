@@ -1,5 +1,6 @@
 'use client';
-import React from 'react';
+import React, { ChangeEvent, useState } from 'react';
+import toBase64 from '@/utils/image-to-byte-array';
 
 interface FormItemProps {
   formTitle: string;
@@ -10,46 +11,43 @@ interface FormItemProps {
   initialImage: string;
 }
 
-export default function UpdatePage({
-  formTitle,
-  initialTitle = '',
-  initialDescription = '',
-  initialPrice,
-  initialCalories,
-  initialImage = '',
-}: FormItemProps) {
-  const [title, setTitle] = React.useState(initialTitle);
-  const [description, setDescription] = React.useState(initialDescription);
-  const [price, setPrice] = React.useState(initialPrice);
-  const [calories, setCalories] = React.useState(initialCalories);
-  const [image, setImage] = React.useState(initialImage);
+export default function UpdatePage(props: FormItemProps) {
+  const [title, setTitle] = useState(props.initialTitle);
+  const [description, setDescription] = useState(props.initialDescription);
+  const [price, setPrice] = useState(props.initialPrice);
+  const [calories, setCalories] = useState(props.initialCalories);
+  const [base64, setBase64] = useState<string>(props.initialImage);
+
+  const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const base64String = await toBase64(file);
+      setBase64(base64String as string);
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
   };
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-default-50">
       <div className="w-full max-w-lg p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8">
         <form onSubmit={handleSubmit} className="space-y-6" action="#">
           <h5 className="text-2xl font-medium text-gray-900 dark:text-white">
-            {formTitle}
+            {props.formTitle}
           </h5>
-          <>
-            <label
-              htmlFor="photo_input"
-              className="block mb-4 text-base font-medium text-gray-900 "
-            >
-              Photo
-            </label>
-            <input
-              src={image}
-              onChange={e => setImage(e.target.value)}
-              className="block w-full p-0.5 text-base text-gray-900 border border-gray-300 rounded-md cursor-pointer bg-gray-50 outline-0"
-              aria-describedby="file_input_help"
-              id="photo_input"
-              type="file"
-            ></input>
-          </>
+          <div>
+            <input type="file" accept="image/*" onChange={handleFileChange} />
+            {base64 && (
+              <img
+                className="p-5"
+                src={base64}
+                alt="Uploaded"
+                style={{ maxWidth: '200px' }}
+              />
+            )}
+          </div>
           <div>
             <label
               htmlFor="title"

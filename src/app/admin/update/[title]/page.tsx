@@ -3,7 +3,7 @@ import React from 'react';
 import { usePathname } from 'next/navigation';
 import InputForm from '@/components/admin/input-form-meal';
 
-function Page() {
+export default function Home() {
   const pathname = usePathname();
   const segments = pathname.split('/');
   const title = segments[segments.length - 1];
@@ -24,5 +24,3 @@ function Page() {
     </>
   );
 }
-
-export default Page;
