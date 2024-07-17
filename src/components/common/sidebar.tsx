@@ -32,7 +32,7 @@ export default function Sidebar(props: SidebarProps) {
       >
         <h5
           id="drawer-navigation-label"
-          className="text-base font-semibold text-gray-500 uppercase dark:text-gray-400"
+          className="text-base font-semibold text-gray-500 uppercase"
         >
           Menu
         </h5>
