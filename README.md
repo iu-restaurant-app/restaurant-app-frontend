@@ -17,3 +17,5 @@ This is a Pasta Palace restaurant website where you can:
    1. Change image name
    2. Change host port (left one) to 80
 7. Update GitHub secrets
+
+#### Do not forget to create ```.env.local``` file.
