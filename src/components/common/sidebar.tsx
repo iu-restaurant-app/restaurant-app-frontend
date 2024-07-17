@@ -6,6 +6,7 @@ import {
   FaInfoCircle,
   FaMapMarkerAlt,
   FaPhone,
+  FaHammer,
 } from 'react-icons/fa';
 
 interface SidebarProps {
@@ -88,6 +89,16 @@ export default function Sidebar(props: SidebarProps) {
                 onClick={() => props.setIsOpen(false)}
               >
                 Contact Us
+              </Link>
+            </div>
+            <div className="flex items-center mt-4">
+              <FaHammer className="text-gray-800" />
+              <Link
+                className="ml-3 font-bold text-gray-800 hover:text-gray-600"
+                href="/admin"
+                onClick={() => props.setIsOpen(false)}
+              >
+                Admin Panel
               </Link>
             </div>
           </div>
