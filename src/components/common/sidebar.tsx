@@ -11,6 +11,7 @@ import {
 interface SidebarProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  isAboutUs: boolean;
 }
 
 export default function Sidebar(props: SidebarProps) {
@@ -34,14 +35,18 @@ export default function Sidebar(props: SidebarProps) {
           id="drawer-navigation-label"
           className="text-base font-semibold text-gray-500 uppercase dark:text-gray-400"
         >
-          Menu
+          Pasta Palace
         </h5>
         <button
           type="button"
           data-drawer-hide="drawer-navigation"
           aria-controls="drawer-navigation"
           onClick={() => props.setIsOpen(false)}
-          className="text-gray-400 bg-transparent hover:bg-default-100 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center"
+          className={`${
+            props.isAboutUs
+              ? 'hover:text-black'
+              : 'hover:bg-default-100 hover:text-gray-900'
+          } text-gray-400 bg-transparent rounded-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center`}
         >
           <svg
             aria-hidden="true"
