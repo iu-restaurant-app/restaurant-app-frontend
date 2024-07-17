@@ -1,11 +1,10 @@
 'use client';
-import { toast, Toaster } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 
 // taken from https://flowbite.com/blocks/marketing/contact/
 export default function ContactUs() {
   return (
     <div>
-      <Toaster position={'bottom-right'} reverseOrder={false} />
       <section
         className="bg-gradient-to-b from-yellow-50 to-white min-h-screen"
         id="contact-us"
