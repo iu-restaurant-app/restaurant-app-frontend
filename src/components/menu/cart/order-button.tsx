@@ -1,4 +1,5 @@
 import { useCartStore } from '@/hooks/useCartStorage';
+import { toast } from 'react-hot-toast';
 
 export default function OrderButton() {
   const { clearCart } = useCartStore(state => state);
@@ -8,6 +9,9 @@ export default function OrderButton() {
       className="text-white bg-default-600 hover:bg-default-700 transition-colors duration-300 ease-in-out font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
       onClick={() => {
         clearCart();
+        toast('Ordered successfully!', {
+          icon: '👏',
+        });
       }}
     >
       Order
