@@ -64,7 +64,7 @@ export default function MenuGallery(props: MenuGalleryProps) {
   }, []);
 
   return (
-    <>
+    <div style={{ minHeight: '900px' }}>
       <MenuSearch onSearchChange={handleSearchChange} />
       {(pageState === PageState.LOADING && (
         <div className="z-0 grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-[100px]">
@@ -135,22 +135,30 @@ export default function MenuGallery(props: MenuGalleryProps) {
           </section>
         )) ||
         (pageState === PageState.SUCCESS && (
-          <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-[100px]">
-            {(searchText !== '' ? filteredMealItems : mealItems).map(
-              (item: MenuItemProps, index: number) => (
-                <MenuItem
-                  key={index}
-                  title={item.title}
-                  description={item.description}
-                  price={item.price}
-                  calories={item.calories}
-                  image={item.image}
-                  handleDelete={props.handleModalShown}
-                />
-              ),
+          <>
+            {(searchText !== '' ? filteredMealItems : mealItems).length > 0 ? (
+              <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-[100px]">
+                {(searchText !== '' ? filteredMealItems : mealItems).map(
+                  (item: MenuItemProps, index: number) => (
+                    <MenuItem
+                      key={index}
+                      title={item.title}
+                      description={item.description}
+                      price={item.price}
+                      calories={item.calories}
+                      image={item.image}
+                      handleDelete={props.handleModalShown}
+                    />
+                  ),
+                )}
+              </div>
+            ) : (
+              <div className="text-center text-gray-700 mt-8 text-xl md:text-3xl font-bold">
+                No meals were found
+              </div>
             )}
-          </div>
+          </>
         ))}
-    </>
+    </div>
   );
 }
