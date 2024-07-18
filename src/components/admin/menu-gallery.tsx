@@ -50,7 +50,7 @@ export default function MenuGallery(props: MenuGalleryProps) {
   return (
     <>
       {(pageState === PageState.LOADING && (
-        <div className="z-0 grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-[100px]">
+        <div className="z-0 grid gap-6 grid-cols-2 mx-[20px] sm:mx-[40px] sm:flex-col sm:justify-items-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:mx-[100px] mb-12">
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((index: number) => (
             <div
               key={index}
@@ -118,7 +118,7 @@ export default function MenuGallery(props: MenuGalleryProps) {
           </section>
         )) ||
         (pageState === PageState.SUCCESS && (
-          <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-[100px]">
+          <div className="grid gap-6 grid-cols-2 mx-[20px] sm:mx-[40px] sm:flex-col sm:justify-items-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:mx-[100px] mb-12">
             {mealItems.map((item: MealRequestResponse, index: number) => (
               <MenuItem
                 key={index}

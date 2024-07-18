@@ -67,8 +67,8 @@ export default function Home() {
           />
         )}
         <ScrollToTopButton
-          color={'bg-default-800'}
-          onHoverColor={'bg-default-900'}
+          color={'bg-default-600'}
+          onHoverColor={'bg-default-800'}
         />
       </div>
     </>
