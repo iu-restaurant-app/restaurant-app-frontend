@@ -1,5 +1,4 @@
 import { useCartStore } from '@/hooks/useCartStorage';
-import CartIcon from '@/components/menu/cart/cart-icon';
 
 interface NavbarProps {
   isOpen: boolean;
@@ -34,7 +33,6 @@ export default function Navbar(props: NavbarProps) {
           />
         </svg>
       </button>
-      {cartQuantity > 0 && <CartIcon />}
     </>
   );
 }

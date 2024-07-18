@@ -23,7 +23,11 @@ export default function Home() {
           'Page with menu where everyone can order something they will like'
         }
       />
-      <Navbar isOpen={isOpenSidebar} setIsOpen={setIsOpenSidebar} />
+      <Navbar
+        isOpen={isOpenSidebar}
+        setIsOpen={setIsOpenSidebar}
+        admin={false}
+      />
       <Sidebar
         isOpen={isOpenSidebar}
         setIsOpen={setIsOpenSidebar}
