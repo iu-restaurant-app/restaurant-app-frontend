@@ -7,7 +7,7 @@ import OrderButton from '@/components/menu/cart/order-button';
 import React from 'react';
 
 export default function CartTable() {
-  const { closeCart, cartItems, cartQuantity, total } = useCartStore(
+  const { closeCart, cartItems, cartQuantity, total, isOpen } = useCartStore(
     state => state,
   );
 
@@ -18,7 +18,9 @@ export default function CartTable() {
 
   return (
     <>
-      <div className={`z-40 absolute top-0 right-0 grid grid-cols-4 h-screen`}>
+      <div
+        className={`z-40 absolute top-0 right-0 grid grid-cols-4 h-screen ${isOpen && 'w-[500px]'}`}
+      >
         <div className="col-start-2 col-span-3 text-sm text-gray-500 shadow-md bg-default-50">
           <div className="text-xs text-gray-700 uppercase bg-default-50">
             <div className="grid grid-cols-5 content-center place-items-center items-center bg-default-50 border-b ">
@@ -45,7 +47,7 @@ export default function CartTable() {
             </div>
           </div>
           <div
-            className={`overflow-auto bg-default-50 flex flex-col h-[580px] ${cartQuantity > 0 ? '' : 'h-screen'}`}
+            className={`overflow-auto bg-default-50 flex flex-col h-[530px] ${cartQuantity > 0 ? 'overscroll-y-auto' : 'h-screen'}`}
           >
             {cartQuantity > 0 ? (
               cartItems.map((item, key) => (
@@ -66,19 +68,19 @@ export default function CartTable() {
           </div>
           {cartQuantity > 0 && (
             <div className={`fixed bottom-0`}>
-              <div className="bg-default-50 h-[115px] w-full border-b justify-items-center grid grid-cols-1">
+              <div className="bg-default-50 h-[135px] w-full border-b justify-items-center grid grid-cols-1">
                 <div className="col-span-1 w-full border-t">
                   <InputField>Comment on the order</InputField>
                 </div>
               </div>
-              <div className="bg-default-50 h-[100px] w-full border-b justify-items-start grid grid-cols-1">
+              <div className="bg-default-50 h-[115px] w-full border-b justify-items-start grid grid-cols-1">
                 <div className="col-span-1 flex items-center justify-start justify-items-start m-4">
                   <Select />
                 </div>
               </div>
               <div className="bg-default-50 h-[80px] w-full justify-items-center grid grid-cols-4 content-center items-center font-semibold text-gray-900">
                 <div className="px-6 py-3 text-xs uppercase">Total:</div>
-                <div className="px-6 py-3">{total}$</div>
+                <div className="px-6 py-3 mx-3">{total}$</div>
                 <div className="col-span-2 px-6 py-3">
                   <OrderButton />
                 </div>
