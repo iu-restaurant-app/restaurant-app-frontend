@@ -18,10 +18,8 @@ export default function CartTable() {
 
   return (
     <>
-      <div
-        className={`z-40 absolute top-0 right-0 grid grid-cols-4 h-screen ${isOpen && 'w-[500px]'}`}
-      >
-        <div className="col-start-2 col-span-3 text-sm text-gray-500 shadow-md bg-default-50">
+      <div className={`z-40 absolute top-0 right-0 h-screen w-full`}>
+        <div className="text-sm text-gray-500 shadow-md bg-default-50">
           <div className="text-xs text-gray-700 uppercase bg-default-50">
             <div className="grid grid-cols-5 content-center place-items-center items-center bg-default-50 border-b ">
               <div className="py-3 col-start-3 text-gray-900">Cart</div>

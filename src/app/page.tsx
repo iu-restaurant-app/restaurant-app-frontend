@@ -49,7 +49,7 @@ export default function Home() {
         initial={{ x: '500px' }}
         animate={{ x: isOpen ? '0' : '500px' }}
         transition={{ duration: 0.2, ease: 'easeInOut' }}
-        className={'fixed top-0 right-0 w-[400px] md:w-[500px] h-screen z-40'}
+        className={'fixed top-0 right-0 w-[270px] md:w-[400px] h-screen z-40'}
       >
         <CartTable />
       </motion.div>
