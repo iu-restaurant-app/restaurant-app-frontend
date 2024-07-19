@@ -5,7 +5,7 @@ import MealService from '@/api/meal/service/meal-service';
 import ByteArrayToImage from '@/utils/byte-array-to-image';
 import MenuItem from '@/components/admin/menu-item';
 import { useMealStore } from '@/hooks/useMealStorage';
-import MenuSearch from '@/components/menu/menu-search';
+import MenuSearchAdmin from '@/components/admin/menu-search-admin';
 import { MenuItemProps } from '@/components/menu/menu-item/menu-item';
 
 enum PageState {
@@ -65,7 +65,7 @@ export default function MenuGallery(props: MenuGalleryProps) {
 
   return (
     <div style={{ minHeight: '1000px' }}>
-      <MenuSearch onSearchChange={handleSearchChange} />
+      <MenuSearchAdmin onSearchChange={handleSearchChange} />
       {(pageState === PageState.LOADING && (
         <div className="z-0 grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-[100px]">
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((index: number) => (
