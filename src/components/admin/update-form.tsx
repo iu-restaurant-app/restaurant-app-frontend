@@ -15,7 +15,7 @@ interface FormItemProps {
   initialImageName: string;
 }
 
-export default function InputForm(props: FormItemProps) {
+export default function UpdateForm(props: FormItemProps) {
   const [description, setDescription] = useState(props.initialDescription);
   const [price, setPrice] = useState(props.initialPrice);
   const [calories, setCalories] = useState(props.initialCalories);
@@ -42,6 +42,12 @@ export default function InputForm(props: FormItemProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (calories === '' || price === '' || imageName === '' || base64 === '') {
+      toast.error("All fields except 'Description' are required.");
+      return;
+    }
+
     MealService.update(props.initialTitle, {
       title: props.initialTitle,
       description: description,
@@ -112,6 +118,7 @@ export default function InputForm(props: FormItemProps) {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-default-600 focus:border-default-600 block w-full p-2.5 outline-0"
               pattern="^[1-9]\d*$"
               placeholder="Write calories here..."
+              required
             />
           </div>
           <div>
@@ -130,6 +137,7 @@ export default function InputForm(props: FormItemProps) {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-default-600 focus:border-default-600 block w-full p-2.5 outline-0"
               pattern="^[1-9]\d*$"
               placeholder="Write price here..."
+              required
             />
           </div>
           <div>
@@ -147,6 +155,7 @@ export default function InputForm(props: FormItemProps) {
               aria-describedby="helper-text-explanation"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-default-600 focus:border-default-600 block w-full p-2.5 outline-0"
               placeholder="Write image name here..."
+              required
             />
           </div>
           <button
