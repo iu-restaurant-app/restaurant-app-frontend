@@ -42,8 +42,8 @@ export default function Home() {
       <Gallery />
       <MenuGallery />
       <ScrollToTopButton
-        color={'bg-default-800'}
-        onHoverColor={'bg-default-900'}
+        color={'bg-default-600'}
+        onHoverColor={'bg-default-800'}
       />
       <motion.div
         initial={{ x: '500px' }}

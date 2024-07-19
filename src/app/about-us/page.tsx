@@ -27,7 +27,10 @@ export default function Home() {
       <Hero />
       <Story />
       <ContactUs />
-      <ScrollToTopButton color={'bg-red-800'} onHoverColor={'bg-red-900'} />
+      <ScrollToTopButton
+        color={'bg-default-600'}
+        onHoverColor={'bg-default-800'}
+      />
     </>
   );
 }

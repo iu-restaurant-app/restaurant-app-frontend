@@ -9,7 +9,7 @@ export default function AddToCartButton(props: AddToCartButtonProps) {
   return (
     <button
       type="button"
-      className={`w-full inline-flex text-default-600 border border-default-600 font-medium rounded-lg text-sm px-2 py-2 items-center justify-between cursor-default`}
+      className={`max-w-[100px] transition-colors duration-300 ease-in-out inline-flex text-default-600 hover:text-white border border-default-600 hover:bg-default-600 hover:max-w-[100px] font-medium rounded-lg text-sm px-2 py-2 group items-center justify-between`}
     >
       <div className="inline-flex mr-2">
         <div className="mr-0.5">{props.price}</div>
