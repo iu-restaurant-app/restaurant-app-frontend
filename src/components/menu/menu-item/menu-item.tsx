@@ -41,7 +41,7 @@ export default function MenuItem(props: MenuItemProps) {
 
           <p className="mb-3 font-normal text-gray-700">{props.description}</p>
         </div>
-        <div className="flex justify-between content-center items-center">
+        <div className="flex justify-between flex-col sm:flex-row content-center items-center">
           <p className="font-light text-gray-500">
             {props.calories + ' calories'}
           </p>
