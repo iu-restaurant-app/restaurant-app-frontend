@@ -43,18 +43,37 @@ export default function UpdateForm(props: FormItemProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (calories === '' || price === '' || imageName === '' || base64 === '') {
-      toast.error("All fields except 'Description' are required.");
+    if (!description.trim()) {
+      toast.error('Please enter a valid description.');
+      return;
+    }
+
+    // Validate price
+    const priceRegex = /^[1-9]\d*$/;
+    if (!price.match(priceRegex)) {
+      toast.error('Please enter a valid price.');
+      return;
+    }
+
+    // Validate calories
+    if (!calories.match(priceRegex)) {
+      toast.error('Please enter a valid calorie count.');
+      return;
+    }
+
+    // Validate image name
+    if (!imageName.trim()) {
+      toast.error('Please enter a valid image name.');
       return;
     }
 
     MealService.update(props.initialTitle, {
       title: props.initialTitle,
-      description: description,
+      description: description.trim(),
       price: Number(price),
       calories: Number(calories),
       image: base64.slice(22),
-      imageName: imageName,
+      imageName: imageName.trim(),
     })
       .then(() => {
         router.push('/admin');
