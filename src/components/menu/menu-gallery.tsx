@@ -51,7 +51,7 @@ export default function MenuGallery() {
   }, []);
 
   return (
-    <div style={{ minHeight: '900px' }}>
+    <div style={{ minHeight: '1000px' }}>
       <MenuSearch onSearchChange={handleSearchChange} />
       {(pageState === PageState.LOADING && (
         <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-[100px]">
