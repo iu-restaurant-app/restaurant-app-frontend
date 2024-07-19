@@ -3,11 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import MealService from '@/api/meal/service/meal-service';
 import ByteArrayToImage from '@/utils/byte-array-to-image';
-import MenuItem, { MenuItemProps } from '@/components/menu/menu-item/menu-item';
+import MenuItem from '@/components/admin/menu-item';
 import { useMealStore } from '@/hooks/useMealStorage';
-import MenuSearch from '@/components/menu/menu-search';
-import ErrorPage from '@/components/common/error-page';
-import resolveError from '@/utils/resolve-error';
+import MenuSearchAdmin from '@/components/admin/menu-search-admin';
+import { MenuItemProps } from '@/components/menu/menu-item/menu-item';
 
 enum PageState {
   LOADING,
@@ -15,10 +14,18 @@ enum PageState {
   ERROR,
 }
 
-export default function MenuGallery() {
+interface MenuGalleryProps {
+  handleModalShown: () => void;
+}
+
+export default function MenuGallery(props: MenuGalleryProps) {
   const [pageState, setPageState] = useState<PageState>(PageState.LOADING);
-  const [error, setError] = useState<number>(0);
+  const [error, setError] = useState<number>();
   const { mealItems, setMealItems } = useMealStore(state => state);
+  const dictionary: Record<string, number> = {
+    ERR_NETWORK: 502,
+    BAD_REQUEST: 400,
+  };
   const [filteredMealItems, setFilteredMealItems] =
     useState<MenuItemProps[]>(mealItems);
   const [searchText, setSearchText] = useState('');
@@ -45,14 +52,20 @@ export default function MenuGallery() {
         setPageState(PageState.SUCCESS);
       })
       .catch(error => {
-        setError(resolveError(error));
+        if (error.response) {
+          console.log(error.response.data);
+          setError(error.response.status);
+        } else {
+          console.log(error);
+          setError(dictionary[error.code]);
+        }
         setPageState(PageState.ERROR);
       });
   }, []);
 
   return (
     <div className={'min-h-[1000px] w-full'}>
-      <MenuSearch onSearchChange={handleSearchChange} />
+      <MenuSearchAdmin onSearchChange={handleSearchChange} />
       {(pageState === PageState.LOADING && (
         <div className="grid gap-6 grid-cols-2 mx-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:mx-[100px] mb-12">
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((index: number) => (
@@ -97,7 +110,30 @@ export default function MenuGallery() {
           ))}
         </div>
       )) ||
-        (pageState === PageState.ERROR && <ErrorPage error={error} />) ||
+        (pageState === PageState.ERROR && (
+          <section className="bg-white">
+            <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+              <div className="mx-auto max-w-screen-sm text-center">
+                <h1 className="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-red-600">
+                  {error}
+                </h1>
+                <p className="mb-4 text-3xl tracking-tight font-bold text-gray-900 md:text-4xl">
+                  Something is missing.
+                </p>
+                <p className="mb-4 text-lg font-light text-gray-500">
+                  Sorry, something went wrong. Try again later.{' '}
+                </p>
+                <a
+                  href="/"
+                  type="submit"
+                  className="inline-flex text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-4"
+                >
+                  Back to Homepage
+                </a>
+              </div>
+            </div>
+          </section>
+        )) ||
         (pageState === PageState.SUCCESS && (
           <>
             {(searchText !== '' ? filteredMealItems : mealItems).length > 0 ? (
@@ -111,6 +147,7 @@ export default function MenuGallery() {
                       price={item.price}
                       calories={item.calories}
                       image={item.image}
+                      handleDelete={props.handleModalShown}
                     />
                   ),
                 )}

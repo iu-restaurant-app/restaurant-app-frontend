@@ -3,11 +3,15 @@ import { useCartStore } from '@/hooks/useCartStorage';
 
 export default function CartIcon() {
   const { openCart, cartQuantity } = useCartStore(state => state);
+  function showCart() {
+    openCart();
+    document.body.classList.add('overflow-hidden');
+  }
   return (
     <button
       type="button"
       className="absolute inline-flex items-center p-3 text-sm font-medium text-center text-white bg-white rounded-full hover:bg-default-100 hover:shadow-md hover:shadow-gray-200 right-4 top-3"
-      onClick={openCart}
+      onClick={showCart}
     >
       <svg
         className="w-6 h-6 text-default-600"

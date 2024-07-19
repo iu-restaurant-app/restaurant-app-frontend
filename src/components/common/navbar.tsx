@@ -4,17 +4,22 @@ import CartIcon from '@/components/menu/cart/cart-icon';
 interface NavbarProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  admin: boolean;
 }
 
 export default function Navbar(props: NavbarProps) {
   const { cartQuantity } = useCartStore(state => state);
+  function showSidebar() {
+    props.setIsOpen(true);
+    document.body.classList.add('overflow-hidden');
+  }
   return (
     <nav className="border-gray-200 bg-white h-[70px]">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <button
           data-collapse-toggle="navbar-hamburger"
           type="button"
-          onClick={() => props.setIsOpen(!props.isOpen)}
+          onClick={showSidebar}
           className="absolute left-4 top-3.5 inline-flex items-center justify-center p-2 w-10 h-10 text-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 rounded-full hover:bg-default-100 hover:shadow-md hover:shadow-gray-200"
           aria-controls="navbar-hamburger"
           aria-expanded="false"
@@ -36,7 +41,7 @@ export default function Navbar(props: NavbarProps) {
             />
           </svg>
         </button>
-        {cartQuantity > 0 && <CartIcon />}
+        {cartQuantity > 0 && !props.admin && <CartIcon />}
       </div>
     </nav>
   );

@@ -1,20 +1,45 @@
+import React, { useState } from 'react';
+
 export default function Select() {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    // Prevent '-' key press
+    if (event.key === '-') {
+      event.preventDefault();
+    }
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    // Continue to prevent negative numbers and non-numeric input
+    if ((value as string).includes('-') || parseInt(value, 10) < 1) {
+      setInputValue('');
+    } else {
+      setInputValue(value);
+    }
+  };
+
   return (
-    <form className="max-w-sm mx-auto mb-3">
-      <label htmlFor="underline_select" className="sr-only">
-        Underline select
-      </label>
-      <select
-        id="underline_select"
-        className="font-medium cursor-pointer block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer text-center"
+    <form className="max-w-sm mx-auto">
+      <label
+        htmlFor="number-input"
+        className="block mb-2 text-sm font-medium text-gray-900"
       >
-        <option defaultValue="Choose a table">Choose a table</option>
-        <option value="1">1 table</option>
-        <option value="2">2 table</option>
-        <option value="3">3 table</option>
-        <option value="4">4 table</option>
-        <option value="5">5 table</option>
-      </select>
+        Write your table number
+      </label>
+      <input
+        type="number"
+        id="number-input"
+        aria-describedby="helper-text-explanation"
+        className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 outline-0"
+        placeholder="120"
+        required
+        min="1"
+        value={inputValue}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+      />
     </form>
   );
 }

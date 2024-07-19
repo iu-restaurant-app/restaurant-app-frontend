@@ -1,7 +1,9 @@
 name: Continuous Integration
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ main, dev ]
+  push:
+    branches: [ dev ]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,3 +19,14 @@ jobs:
 
       - name: Push Docker image
         run: docker push almaxgood/restaurant-app-frontend:temp
+
+      - name: Run Docker container
+        run: docker run -t --name restaurant-app-frontend -d -p 3000:3000 almaxgood/restaurant-app-frontend:temp
+
+      - name: Wait Docker container to start
+        uses: GuillaumeFalourd/wait-sleep-action@v1
+        with:
+          time: '15'
+
+      - name: Show Docker container logs
+        run: docker logs restaurant-app-frontend
