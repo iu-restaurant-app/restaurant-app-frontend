@@ -51,7 +51,7 @@ export default function MenuGallery() {
   }, []);
 
   return (
-    <div className="min-h-[1000px]">
+    <div className={'min-h-[1000px] w-full'}>
       <MenuSearch onSearchChange={handleSearchChange} />
       {(pageState === PageState.LOADING && (
         <div className="grid gap-6 grid-cols-2 mx-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:mx-[100px] mb-12">
