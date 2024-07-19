@@ -45,15 +45,17 @@ export default function MenuItem(props: MenuItemProps) {
               {props.title}
             </h5>
 
-            <p className="mb-3 font-normal text-gray-700">
+            <p className="mb-3 font-normal text-gray-700 text-sm sm:text-sm md:text-lg lg:text-lg xl:text-lg">
               {props.description}
             </p>
           </div>
-          <div className="flex justify-between content-center items-center">
+          <div className="flex justify-between flex-col sm:flex-row sm:items-start sm:content-start gap-2 md:content-center md:items-center">
             <p className="font-light text-gray-500">
               {props.calories + ' calories'}
             </p>
-            <div className={`h-[35px] inline-flex text-default-600 rounded-lg`}>
+            <div
+              className={`h-[35px] max-w-[70px] transition-colors duration-300 ease-in-out inline-flex text-default-600 hover:text-white hover:bg-default-600 rounded-lg`}
+            >
               <AddToCartButton price={props.price} />
             </div>
           </div>
