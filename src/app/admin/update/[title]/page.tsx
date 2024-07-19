@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import InputForm from '@/components/admin/input-form-meal';
+import UpdateForm from '@/components/admin/update-form';
 import MealService from '@/api/meal/service/meal-service';
 import { MealRequestResponse } from '@/api/meal/body/meal-request-response';
 import resolveError from '@/utils/resolve-error';
@@ -37,9 +37,9 @@ export default function Home() {
   return (
     <>
       {(pageState === PageState.SUCCESS && (
-        <InputForm
-          formTitle={`Update ${title}`}
-          initialTitle={title as string}
+        <UpdateForm
+          formTitle={`Update ${meal.title}`}
+          initialTitle={meal.title as string}
           initialDescription={meal.description}
           initialPrice={String(meal.price)}
           initialImage={meal.image}

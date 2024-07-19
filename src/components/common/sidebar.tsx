@@ -8,21 +8,23 @@ import {
   FaPhone,
   FaHammer,
 } from 'react-icons/fa';
+import Overlay from '@/components/admin/overlay';
 
 interface SidebarProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  isAboutUs: boolean;
 }
 
 export default function Sidebar(props: SidebarProps) {
+  function hideSidebar() {
+    props.setIsOpen(false);
+    document.body.classList.remove('overflow-hidden');
+  }
+
   return (
     <>
-      {props.isOpen && (
-        <div
-          className="fixed top-0 left-0 z-30 w-full h-full bg-black opacity-50"
-          onClick={() => props.setIsOpen(false)}
-        ></div>
-      )}
+      {props.isOpen && <Overlay onClick={hideSidebar} />}
       <div
         id="drawer-navigation"
         className={`fixed top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto transition-transform ${
@@ -35,13 +37,13 @@ export default function Sidebar(props: SidebarProps) {
           id="drawer-navigation-label"
           className="text-base font-semibold text-gray-500 uppercase"
         >
-          Menu
+          Pasta Palace
         </h5>
         <button
           type="button"
           data-drawer-hide="drawer-navigation"
           aria-controls="drawer-navigation"
-          onClick={() => props.setIsOpen(false)}
+          onClick={hideSidebar}
           className="text-gray-400 bg-transparent hover:bg-default-100 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center"
         >
           <svg
@@ -66,7 +68,7 @@ export default function Sidebar(props: SidebarProps) {
               <Link
                 href="/"
                 className="ml-3 font-bold text-gray-800 hover:text-gray-600"
-                onClick={() => props.setIsOpen(false)}
+                onClick={hideSidebar}
               >
                 Home
               </Link>
@@ -76,7 +78,7 @@ export default function Sidebar(props: SidebarProps) {
               <Link
                 href="/about-us"
                 className="ml-3 font-bold text-gray-800 hover:text-gray-600"
-                onClick={() => props.setIsOpen(false)}
+                onClick={hideSidebar}
               >
                 About Us
               </Link>
@@ -86,7 +88,7 @@ export default function Sidebar(props: SidebarProps) {
               <Link
                 className="ml-3 font-bold text-gray-800 hover:text-gray-600"
                 href="/about-us#contact-us"
-                onClick={() => props.setIsOpen(false)}
+                onClick={hideSidebar}
               >
                 Contact Us
               </Link>
@@ -96,7 +98,7 @@ export default function Sidebar(props: SidebarProps) {
               <Link
                 className="ml-3 font-bold text-gray-800 hover:text-gray-600"
                 href="/admin"
-                onClick={() => props.setIsOpen(false)}
+                onClick={hideSidebar}
               >
                 Admin Panel
               </Link>

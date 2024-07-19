@@ -1,7 +1,6 @@
 'use client';
 
 import Gallery from '@/components/menu/gallery';
-import MenuSearch from '@/components/menu/menu-search';
 import MenuGallery from '@/components/admin/menu-gallery';
 import ScrollToTopButton from '@/components/common/scroll-to-top-button';
 import React, { useState } from 'react';
@@ -13,12 +12,14 @@ import Overlay from '@/components/admin/overlay';
 import MealService from '@/api/meal/service/meal-service';
 import { useMealStore } from '@/hooks/useMealStorage';
 import { toast } from 'react-hot-toast';
+import { useCartStore } from '@/hooks/useCartStorage';
 
 export default function Home() {
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
   const [isModalShown, setIsModalShown] = useState(false);
   const { itemToDelete, setItemToDelete, mealItems, setMealItems } =
     useMealStore(state => state);
+  const { removeFromCart } = useCartStore(state => state);
 
   function showModal() {
     setIsModalShown(true);
@@ -45,9 +46,12 @@ export default function Home() {
           setIsOpen={setIsOpenSidebar}
           admin={true}
         />
-        <Sidebar isOpen={isOpenSidebar} setIsOpen={setIsOpenSidebar} />
+        <Sidebar
+          isOpen={isOpenSidebar}
+          setIsOpen={setIsOpenSidebar}
+          isAboutUs={false}
+        />
         <Gallery />
-        <MenuSearch />
         <MenuGallery handleModalShown={() => showModal()} />
         {isModalShown && (
           <Modal
@@ -57,6 +61,7 @@ export default function Home() {
                 setMealItems(
                   mealItems.filter(item => item.title !== itemToDelete),
                 );
+                removeFromCart(itemToDelete);
                 MealService.delete(itemToDelete).then(() =>
                   toast.success('Successfully deleted!'),
                 );

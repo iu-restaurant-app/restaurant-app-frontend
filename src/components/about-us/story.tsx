@@ -62,9 +62,9 @@ export default function Story() {
       </section>
 
       <section className="@apply bg-gray-50/40 flex min-h-screen flex-col items-center justify-center bg-fixed bg-[url('/italianFood.jpg')] bg-center bg-cover text-black] gap-y-16 text-center bg-white">
-        <div className="max-w-80 md:max-w-2xl bg-yellow-50 border border-yellow-50 rounded-3xl shadow mt-10 md:ml-96 md:mt-0">
+        <div className="max-w-80 sm:max-w-sm md:max-w-md lg:max-w-xl bg-yellow-50 border border-yellow-50 rounded-3xl shadow mt-10 md:ml-72 md:mt-20 lg:ml-96 lg:mt-20">
           <div className="p-5">
-            <h3 className="text-2xl md:text-4xl font-semibold text-red-900">
+            <h3 className="text-2xl sm:text-2xl md:text-4xl lg:text-4xl font-semibold text-red-900">
               Our goal
             </h3>
             <br />
@@ -78,9 +78,9 @@ export default function Story() {
           </div>
         </div>
 
-        <div className="max-w-80 md:max-w-2xl bg-yellow-50 border border-yellow-50 rounded-3xl shadow md:mr-96">
+        <div className="max-w-80 sm:max-w-sm md:max-w-md lg:max-w-xl bg-yellow-50 border border-yellow-50 rounded-3xl shadow mt-10 md:mr-72 md:mt-20 lg:mr-96 lg:mt-20">
           <div className="p-5">
-            <h3 className="text-2xl md:text-4xl font-semibold text-red-900">
+            <h3 className="text-2xl sm:text-2xl md:text-4xl lg:text-4xl font-semibold text-red-900">
               Our purpose
             </h3>
             <br />
