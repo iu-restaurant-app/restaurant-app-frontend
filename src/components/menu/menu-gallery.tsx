@@ -1,10 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MealService from '@/api/meal/service/meal-service';
 import ByteArrayToImage from '@/utils/byte-array-to-image';
 import MenuItem, { MenuItemProps } from '@/components/menu/menu-item/menu-item';
 import { useMealStore } from '@/hooks/useMealStorage';
+import MenuSearch from '@/components/menu/menu-search';
+import ErrorPage from '@/components/common/error-page';
+import resolveError from '@/utils/resolve-error';
 
 enum PageState {
   LOADING,
@@ -14,12 +17,22 @@ enum PageState {
 
 export default function MenuGallery() {
   const [pageState, setPageState] = useState<PageState>(PageState.LOADING);
-  const [error, setError] = useState<number>();
-  // const [meals, setMeals] = useState<MealRequestResponse[]>([]);
+  const [error, setError] = useState<number>(0);
   const { mealItems, setMealItems } = useMealStore(state => state);
-  const dictionary: Record<string, number> = {
-    ERR_NETWORK: 502,
-    BAD_REQUEST: 400,
+  const [filteredMealItems, setFilteredMealItems] =
+    useState<MenuItemProps[]>(mealItems);
+  const [searchText, setSearchText] = useState('');
+
+  const handleSearchChange = (search: string) => {
+    setSearchText(search);
+    if (search === '') {
+      setFilteredMealItems(mealItems);
+    } else {
+      const filteredItems = mealItems.filter((item: MenuItemProps) =>
+        item.title.toLowerCase().includes(search.toLowerCase()),
+      );
+      setFilteredMealItems(filteredItems);
+    }
   };
 
   useEffect(() => {
@@ -28,24 +41,18 @@ export default function MenuGallery() {
         response.forEach(item => {
           item.image = ByteArrayToImage(item.image);
         });
-        // setMeals(response);
         setMealItems(response);
         setPageState(PageState.SUCCESS);
       })
       .catch(error => {
-        if (error.response) {
-          console.log(error.response.data);
-          setError(error.response.status);
-        } else {
-          console.log(error);
-          setError(dictionary[error.code]);
-        }
+        setError(resolveError(error));
         setPageState(PageState.ERROR);
       });
   }, []);
 
   return (
-    <>
+    <div style={{ minHeight: '1000px' }}>
+      <MenuSearch onSearchChange={handleSearchChange} />
       {(pageState === PageState.LOADING && (
         <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-[100px]">
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((index: number) => (
@@ -90,44 +97,31 @@ export default function MenuGallery() {
           ))}
         </div>
       )) ||
-        (pageState === PageState.ERROR && (
-          <section className="bg-white">
-            <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-              <div className="mx-auto max-w-screen-sm text-center">
-                <h1 className="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-red-600">
-                  {error}
-                </h1>
-                <p className="mb-4 text-3xl tracking-tight font-bold text-gray-900 md:text-4xl">
-                  Something is missing.
-                </p>
-                <p className="mb-4 text-lg font-light text-gray-500">
-                  Sorry, something went wrong. Try again later.{' '}
-                </p>
-                <a
-                  href="/"
-                  type="submit"
-                  className="inline-flex text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-4"
-                >
-                  Back to Homepage
-                </a>
-              </div>
-            </div>
-          </section>
-        )) ||
+        (pageState === PageState.ERROR && <ErrorPage error={error} />) ||
         (pageState === PageState.SUCCESS && (
-          <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-[100px]">
-            {mealItems.map((item: MenuItemProps, index: number) => (
-              <MenuItem
-                key={index}
-                title={item.title}
-                description={item.description}
-                price={item.price}
-                calories={item.calories}
-                image={item.image}
-              />
-            ))}
-          </div>
+          <>
+            {(searchText !== '' ? filteredMealItems : mealItems).length > 0 ? (
+              <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-[100px]">
+                {(searchText !== '' ? filteredMealItems : mealItems).map(
+                  (item: MenuItemProps, index: number) => (
+                    <MenuItem
+                      key={index}
+                      title={item.title}
+                      description={item.description}
+                      price={item.price}
+                      calories={item.calories}
+                      image={item.image}
+                    />
+                  ),
+                )}
+              </div>
+            ) : (
+              <div className="text-center text-gray-700 mt-8 text-xl md:text-3xl font-bold">
+                No meals were found
+              </div>
+            )}
+          </>
         ))}
-    </>
+    </div>
   );
 }

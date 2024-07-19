@@ -1,6 +1,8 @@
 'use client';
 import React, { ChangeEvent, useState } from 'react';
-import toBase64 from '@/utils/image-to-byte-array';
+import ByteArrayToImage from '@/utils/byte-array-to-image';
+import MealService from '@/api/meal/service/meal-service';
+import { toast } from 'react-hot-toast';
 
 interface FormItemProps {
   formTitle: string;
@@ -9,6 +11,7 @@ interface FormItemProps {
   initialPrice: string;
   initialCalories: string;
   initialImage: string;
+  initialImageName: string;
 }
 
 export default function UpdatePage(props: FormItemProps) {
@@ -16,36 +19,61 @@ export default function UpdatePage(props: FormItemProps) {
   const [description, setDescription] = useState(props.initialDescription);
   const [price, setPrice] = useState(props.initialPrice);
   const [calories, setCalories] = useState(props.initialCalories);
-  const [base64, setBase64] = useState<string>(props.initialImage);
+  const [imageName, setImageName] = useState(props.initialImageName);
+  const [base64, setBase64] = useState<string>(
+    ByteArrayToImage(props.initialImage),
+  );
 
-  const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      const base64String = await toBase64(file);
-      setBase64(base64String as string);
+      toBase64(file);
     }
+  };
+
+  const toBase64 = (file: File) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => setBase64(reader.result as string);
+    reader.onerror = error =>
+      console.error('Error converting file to base64:', error);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    MealService.update(props.initialTitle, {
+      title: title,
+      description: description,
+      price: Number(price),
+      calories: Number(calories),
+      image: base64.slice(22),
+      imageName: imageName,
+    })
+      .then(() => toast.success('Meal updated successfully!'))
+      .catch(error => {
+        toast.error('Failed to update meal.');
+        console.log(error);
+      });
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-default-50">
       <div className="w-full max-w-lg p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8">
-        <form onSubmit={handleSubmit} className="space-y-6" action="#">
-          <h5 className="text-2xl font-medium text-gray-900 dark:text-white">
+        <form className="space-y-6">
+          <h5 className="text-2xl font-medium text-gray-900">
             {props.formTitle}
           </h5>
           <div>
             <input type="file" accept="image/*" onChange={handleFileChange} />
             {base64 && (
-              <img
-                className="p-5"
-                src={base64}
-                alt="Uploaded"
-                style={{ maxWidth: '200px' }}
-              />
+              <>
+                <img
+                  className="pt-5"
+                  src={base64}
+                  alt={imageName}
+                  style={{ maxWidth: '200px' }}
+                />
+              </>
             )}
           </div>
           <div>
@@ -57,7 +85,7 @@ export default function UpdatePage(props: FormItemProps) {
             </label>
             <input
               type="text"
-              id="default-title"
+              id="title"
               value={title}
               onChange={e => setTitle(e.target.value)}
               className="block w-full p-4 text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-default-600 focus:border-default-600 outline-0"
@@ -117,8 +145,26 @@ export default function UpdatePage(props: FormItemProps) {
               placeholder="Write price here..."
             />
           </div>
+          <div>
+            <label
+              htmlFor="image-name"
+              className="block mb-4 text-base font-medium text-gray-900"
+            >
+              Image name
+            </label>
+            <input
+              type="text"
+              id="image-name"
+              value={imageName}
+              onChange={e => setImageName(e.target.value)}
+              aria-describedby="helper-text-explanation"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-default-600 focus:border-default-600 block w-full p-2.5 outline-0"
+              placeholder="Write image name here..."
+            />
+          </div>
           <button
             type="submit"
+            onClick={handleSubmit}
             className="w-full text-white bg-default-700 hover:bg-default-800 focus:ring-4 focus:outline-none focus:ring-default-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
           >
             Save changes

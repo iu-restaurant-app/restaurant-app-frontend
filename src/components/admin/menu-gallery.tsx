@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MealService from '@/api/meal/service/meal-service';
 import ByteArrayToImage from '@/utils/byte-array-to-image';
 import MenuItem from '@/components/admin/menu-item';
 import { useMealStore } from '@/hooks/useMealStorage';
-import { MealRequestResponse } from '@/api/meal/body/meal-request-response';
+import MenuSearch from '@/components/menu/menu-search';
+import { MenuItemProps } from '@/components/menu/menu-item/menu-item';
 
 enum PageState {
   LOADING,
@@ -24,6 +25,21 @@ export default function MenuGallery(props: MenuGalleryProps) {
   const dictionary: Record<string, number> = {
     ERR_NETWORK: 502,
     BAD_REQUEST: 400,
+  };
+  const [filteredMealItems, setFilteredMealItems] =
+    useState<MenuItemProps[]>(mealItems);
+  const [searchText, setSearchText] = useState('');
+
+  const handleSearchChange = (search: string) => {
+    setSearchText(search);
+    if (search === '') {
+      setFilteredMealItems(mealItems);
+    } else {
+      const filteredItems = mealItems.filter((item: MenuItemProps) =>
+        item.title.toLowerCase().includes(search.toLowerCase()),
+      );
+      setFilteredMealItems(filteredItems);
+    }
   };
 
   useEffect(() => {
@@ -48,7 +64,8 @@ export default function MenuGallery(props: MenuGalleryProps) {
   }, []);
 
   return (
-    <>
+    <div style={{ minHeight: '900px' }}>
+      <MenuSearch onSearchChange={handleSearchChange} />
       {(pageState === PageState.LOADING && (
         <div className="z-0 grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-[100px]">
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((index: number) => (
@@ -118,20 +135,30 @@ export default function MenuGallery(props: MenuGalleryProps) {
           </section>
         )) ||
         (pageState === PageState.SUCCESS && (
-          <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-[100px]">
-            {mealItems.map((item: MealRequestResponse, index: number) => (
-              <MenuItem
-                key={index}
-                title={item.title}
-                description={item.description}
-                price={item.price}
-                calories={item.calories}
-                image={item.image}
-                handleDelete={props.handleModalShown}
-              />
-            ))}
-          </div>
+          <>
+            {(searchText !== '' ? filteredMealItems : mealItems).length > 0 ? (
+              <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-[100px]">
+                {(searchText !== '' ? filteredMealItems : mealItems).map(
+                  (item: MenuItemProps, index: number) => (
+                    <MenuItem
+                      key={index}
+                      title={item.title}
+                      description={item.description}
+                      price={item.price}
+                      calories={item.calories}
+                      image={item.image}
+                      handleDelete={props.handleModalShown}
+                    />
+                  ),
+                )}
+              </div>
+            ) : (
+              <div className="text-center text-gray-700 mt-8 text-xl md:text-3xl font-bold">
+                No meals were found
+              </div>
+            )}
+          </>
         ))}
-    </>
+    </div>
   );
 }

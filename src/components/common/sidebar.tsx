@@ -13,6 +13,7 @@ import Overlay from '@/components/admin/overlay';
 interface SidebarProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  isAboutUs: boolean;
 }
 
 export default function Sidebar(props: SidebarProps) {
@@ -36,7 +37,7 @@ export default function Sidebar(props: SidebarProps) {
           id="drawer-navigation-label"
           className="text-base font-semibold text-gray-500 uppercase"
         >
-          Menu
+          Pasta Palace
         </h5>
         <button
           type="button"

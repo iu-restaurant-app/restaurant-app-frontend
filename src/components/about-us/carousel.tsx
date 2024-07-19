@@ -31,7 +31,7 @@ const Carousel = ({
         name="viewport"
         content="width=device-width,height=device-height,initial-scale=1.0"
       />
-      <div className="relative overflow-hidden rounded-3xl h-[200px] w-[350px] md:h-[500px] md:w-[900px]">
+      <div className="relative overflow-hidden rounded-3xl h-[200px] w-[350px] sm:h-[300px] sm:w-[550px] md:h-[400px] md:w-[700px] lg:h-[500px] lg:w-[900px]">
         <div
           ref={carouselRef}
           style={{
@@ -58,14 +58,14 @@ const Carousel = ({
           onClick={() => setCurrentImg(prev => prev - 1)}
           className={`border rounded-3xl px-4 py-2 font-bold ${currentImg === 0 && 'opacity-50'}`}
         >
-          {'<-'}
+          {'<'}
         </button>
         <button
           disabled={currentImg === data.length - 1}
           onClick={() => setCurrentImg(prev => prev + 1)}
           className={`border rounded-3xl px-4 py-2 font-bold ${currentImg === data.length - 1 && 'opacity-50'}`}
         >
-          {'->'}
+          {'>'}
         </button>
       </div>
     </div>

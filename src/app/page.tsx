@@ -1,7 +1,6 @@
 'use client';
 
 import Gallery from '@/components/menu/gallery';
-import MenuSearch from '@/components/menu/menu-search';
 import MenuGallery from '@/components/menu/menu-gallery';
 import ScrollToTopButton from '@/components/common/scroll-to-top-button';
 import React, { useState } from 'react';
@@ -35,9 +34,12 @@ export default function Home() {
         setIsOpen={setIsOpenSidebar}
         admin={false}
       />
-      <Sidebar isOpen={isOpenSidebar} setIsOpen={setIsOpenSidebar} />
+      <Sidebar
+        isOpen={isOpenSidebar}
+        setIsOpen={setIsOpenSidebar}
+        isAboutUs={false}
+      />
       <Gallery />
-      <MenuSearch />
       <MenuGallery />
       <ScrollToTopButton
         color={'bg-default-800'}
