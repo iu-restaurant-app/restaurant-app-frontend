@@ -3,6 +3,7 @@ import React, { ChangeEvent, useState } from 'react';
 import ByteArrayToImage from '@/utils/byte-array-to-image';
 import MealService from '@/api/meal/service/meal-service';
 import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 interface FormItemProps {
   formTitle: string;
@@ -14,8 +15,7 @@ interface FormItemProps {
   initialImageName: string;
 }
 
-export default function UpdatePage(props: FormItemProps) {
-  const [title, setTitle] = useState(props.initialTitle);
+export default function InputForm(props: FormItemProps) {
   const [description, setDescription] = useState(props.initialDescription);
   const [price, setPrice] = useState(props.initialPrice);
   const [calories, setCalories] = useState(props.initialCalories);
@@ -23,6 +23,7 @@ export default function UpdatePage(props: FormItemProps) {
   const [base64, setBase64] = useState<string>(
     ByteArrayToImage(props.initialImage),
   );
+  const router = useRouter();
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -42,14 +43,17 @@ export default function UpdatePage(props: FormItemProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     MealService.update(props.initialTitle, {
-      title: title,
+      title: props.initialTitle,
       description: description,
       price: Number(price),
       calories: Number(calories),
       image: base64.slice(22),
       imageName: imageName,
     })
-      .then(() => toast.success('Meal updated successfully!'))
+      .then(() => {
+        router.push('/admin');
+        toast.success('Meal updated successfully!');
+      })
       .catch(error => {
         toast.error('Failed to update meal.');
         console.log(error);
@@ -75,23 +79,6 @@ export default function UpdatePage(props: FormItemProps) {
                 />
               </>
             )}
-          </div>
-          <div>
-            <label
-              htmlFor="title"
-              className="block mb-4 text-base font-medium text-gray-900 "
-            >
-              Title
-            </label>
-            <input
-              type="text"
-              id="title"
-              value={title}
-              onChange={e => setTitle(e.target.value)}
-              className="block w-full p-4 text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-default-600 focus:border-default-600 outline-0"
-              placeholder="Write title here..."
-              required
-            />
           </div>
           <div className="mb-6">
             <label

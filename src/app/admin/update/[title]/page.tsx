@@ -38,8 +38,8 @@ export default function Home() {
     <>
       {(pageState === PageState.SUCCESS && (
         <InputForm
-          formTitle={`Update ${title}`}
-          initialTitle={title as string}
+          formTitle={`Update ${meal.title}`}
+          initialTitle={meal.title as string}
           initialDescription={meal.description}
           initialPrice={String(meal.price)}
           initialImage={meal.image}

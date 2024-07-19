@@ -3,7 +3,7 @@ export default function Select() {
     <form className="max-w-sm mx-auto">
       <label
         htmlFor="number-input"
-        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        className="block mb-2 text-sm font-medium text-gray-900"
       >
         Write your table number
       </label>
