@@ -16,7 +16,7 @@ export default function CartItem(props: CartItemProps) {
   if (item == null) return null;
   return (
     <>
-      <td className=" p-4 self-center items-center justify-center">
+      <div className=" p-4 self-center items-center justify-center">
         <div className="h-15 overflow-hidden">
           <img
             src={item.image}
@@ -24,11 +24,11 @@ export default function CartItem(props: CartItemProps) {
             alt={props.title}
           />
         </div>
-      </td>
-      <td className="flex px-6 py-4 font-semibold text-gray-900 text-center items-center justify-center">
+      </div>
+      <div className="flex px-6 py-4 font-semibold text-gray-900 text-center items-center justify-center">
         {props.title}
-      </td>
-      <td className="flex px-6 py-4 justify-center self-center">
+      </div>
+      <div className="flex px-6 py-4 justify-center self-center">
         <div className="flex items-center self-center">
           <NumberInputButton
             count={props.quantity}
@@ -41,10 +41,10 @@ export default function CartItem(props: CartItemProps) {
             }}
           />
         </div>
-      </td>
-      <td className="flex items-center justify-center px-6 py-4 font-semibold text-gray-900 text-center">
+      </div>
+      <div className="flex items-center justify-center px-6 py-4 font-semibold text-gray-900 text-center">
         {item.price * props.quantity + '$'}
-      </td>
+      </div>
     </>
   );
 }

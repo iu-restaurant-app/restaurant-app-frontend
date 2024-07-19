@@ -12,12 +12,14 @@ import Overlay from '@/components/admin/overlay';
 import MealService from '@/api/meal/service/meal-service';
 import { useMealStore } from '@/hooks/useMealStorage';
 import { toast } from 'react-hot-toast';
+import { useCartStore } from '@/hooks/useCartStorage';
 
 export default function Home() {
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
   const [isModalShown, setIsModalShown] = useState(false);
   const { itemToDelete, setItemToDelete, mealItems, setMealItems } =
     useMealStore(state => state);
+  const { removeFromCart } = useCartStore(state => state);
 
   function showModal() {
     setIsModalShown(true);
@@ -59,6 +61,7 @@ export default function Home() {
                 setMealItems(
                   mealItems.filter(item => item.title !== itemToDelete),
                 );
+                removeFromCart(itemToDelete);
                 MealService.delete(itemToDelete).then(() =>
                   toast.success('Successfully deleted!'),
                 );
