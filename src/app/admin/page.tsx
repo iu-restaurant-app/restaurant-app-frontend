@@ -1,7 +1,6 @@
 'use client';
 
 import Gallery from '@/components/menu/gallery';
-import MenuSearch from '@/components/menu/menu-search';
 import MenuGallery from '@/components/admin/menu-gallery';
 import ScrollToTopButton from '@/components/common/scroll-to-top-button';
 import React, { useState } from 'react';
@@ -45,9 +44,12 @@ export default function Home() {
           setIsOpen={setIsOpenSidebar}
           admin={true}
         />
-        <Sidebar isOpen={isOpenSidebar} setIsOpen={setIsOpenSidebar} />
+        <Sidebar
+          isOpen={isOpenSidebar}
+          setIsOpen={setIsOpenSidebar}
+          isAboutUs={false}
+        />
         <Gallery />
-        <MenuSearch />
         <MenuGallery handleModalShown={() => showModal()} />
         {isModalShown && (
           <Modal
