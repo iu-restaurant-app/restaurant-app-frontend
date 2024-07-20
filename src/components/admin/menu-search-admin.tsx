@@ -24,7 +24,7 @@ const MenuSearchAdmin: React.FC<MenuSearchProps> = ({ onSearchChange }) => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row mx-[70px] items-center">
+    <div className="flex flex-col md:flex-row mx-[70px] justify-between">
       <div className="flex-col items-start p-8 md:w-1/2">
         <h1 className="text-4xl md:text-4xl font-bold mb-4 text-center md:text-left">
           Menu
@@ -58,7 +58,10 @@ const MenuSearchAdmin: React.FC<MenuSearchProps> = ({ onSearchChange }) => {
             <span>Create Meal</span>
           </button>
         </div>
-        <form className="w-full md:w-auto" onSubmit={handleSubmit}>
+        <form
+          className="w-full max-w-[300px] md:w-auto"
+          onSubmit={handleSubmit}
+        >
           <label
             htmlFor="default-search"
             className="mb-4 text-sm font-medium text-gray-900 sr-only"

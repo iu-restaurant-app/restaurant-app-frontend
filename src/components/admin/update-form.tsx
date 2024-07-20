@@ -50,14 +50,15 @@ export default function UpdateForm(props: FormItemProps) {
 
     // Validate price
     const priceRegex = /^[1-9]\d*$/;
-    if (!price.match(priceRegex)) {
-      toast.error('Please enter a valid price.');
-      return;
-    }
 
     // Validate calories
     if (!calories.match(priceRegex)) {
       toast.error('Please enter a valid calorie count.');
+      return;
+    }
+
+    if (!price.match(priceRegex)) {
+      toast.error('Please enter a valid price.');
       return;
     }
 
