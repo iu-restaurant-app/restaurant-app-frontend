@@ -18,7 +18,9 @@ export default function CartTable() {
 
   return (
     <>
-      <div className={`z-40 absolute top-0 right-0 h-screen w-full`}>
+      <div
+        className={`z-40 absolute top-0 right-0 h-screen w-full bg-default-50`}
+      >
         <div className="text-sm text-gray-500 shadow-md bg-default-50">
           <div className="text-xs text-gray-700 uppercase bg-default-50">
             <div className="grid grid-cols-5 content-center place-items-center items-center bg-default-50 border-b ">
@@ -45,7 +47,7 @@ export default function CartTable() {
             </div>
           </div>
           <div
-            className={`overflow-auto bg-default-50 flex flex-col h-[530px] ${cartQuantity > 0 ? 'overscroll-y-auto' : 'h-screen'}`}
+            className={`overflow-auto bg-default-50 flex flex-col h-[560px] ${cartQuantity > 0 ? 'overscroll-y-auto' : 'h-screen'}`}
           >
             {cartQuantity > 0 ? (
               cartItems.map((item, key) => (
