@@ -18,14 +18,14 @@ const MenuSearch: React.FC<MenuSearchProps> = ({ onSearchChange }) => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row mx-[70px] items-center">
-      <div className="flex-col items-start p-8 md:w-1/2">
+    <div className="flex flex-col md:flex-row mx-[100px] justify-between items-center my-6">
+      <div className="flex-col items-start m-4 md:w-1/2">
         <h1 className="text-4xl md:text-4xl font-bold mb-4 text-left">Menu</h1>
         <p className="text-gray-600 text-md md:text-xl text-left">
           Bright as the sun in Italy ☀️
         </p>
       </div>
-      <div className="p-8 md:w-1/2">
+      <div className="md:w-1/2 max-w-[300px]">
         <form className="mx-auto" onSubmit={handleSubmit}>
           <label
             htmlFor="default-search"
